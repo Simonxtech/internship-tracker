@@ -1,0 +1,63 @@
+<!--
+  =============================================================
+   page7.html — Platzhalter-Seite
+  =============================================================
+
+   Diese Seite hat nur die Grundstruktur mit Navigation.
+   Der Inhalt wird später definiert.
+  =============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Tracker — More</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <!-- Seiteninhalt -->
+    <div class="page-container">
+
+        <div class="page-header">
+            <h1 class="page-title">More Features</h1>
+            <p class="page-subtitle">This page is a placeholder for future features.</p>
+        </div>
+
+        <div class="card" style="text-align:center; padding:60px 20px;">
+            <div style="font-size:48px; margin-bottom:16px;">🚧</div>
+            <h2 style="font-size:18px; font-weight:600; margin-bottom:8px;">Coming Soon</h2>
+            <p style="color:var(--text-muted); font-size:14px; max-width:400px; margin:0 auto;">
+                This page will be filled with additional features in the future.
+                For now, check out the other sections of the app!
+            </p>
+            <div style="margin-top:24px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+                <a href="/applications.html" class="btn btn-primary">📋 View Applications</a>
+                <a href="/application-form.html" class="btn btn-secondary">➕ Add New</a>
+                <a href="/analytics.html" class="btn btn-secondary">📊 Analytics</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="/js/navigation.js"></script>
+    <script>
+    /**
+     * Seite initialisieren
+     */
+    async function initPage7() {
+        await initPage('page7');
+    }
+    initPage7();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!--
+  =============================================================
+   analytics.html — Statistiken und Dashboard
+  =============================================================
+
+   Zeigt verschiedene Auswertungen der Bewerbungen:
+     - Gesamtzahl und Status-Übersicht
+     - Donut-Chart der Status-Verteilung (SVG)
+     - Bewerbungen pro Monat (Balkendiagramm)
+     - Conversion-Funnel
+     - Internship vs Working Student Verteilung
+     - Period-Distribution
+
+   Alles mit reinem HTML/CSS/SVG — keine externe Chart-Library!
+  =============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Tracker — Analytics</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <!-- Seiteninhalt -->
+    <div class="page-container">
+
+        <div class="page-header">
+            <h1 class="page-title">Analytics</h1>
+            <p class="page-subtitle">Insights and statistics about your application progress.</p>
+        </div>
+
+        <!-- Stat-Cards oben -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total</div>
+                <div class="stat-value" id="statTotal" style="color: var(--accent)">0</div>
+                <div class="stat-sub">Applications</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Interviews</div>
+                <div class="stat-value" id="statInterviews" style="color: var(--orange)">0</div>
+                <div class="stat-sub">Scheduled</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Offers</div>
+                <div class="stat-value" id="statOffers" style="color: var(--success)">0</div>
+                <div class="stat-sub">Received</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Rejection Rate</div>
+                <div class="stat-value" id="statRejRate" style="color: var(--danger)">0%</div>
+                <div class="stat-sub" id="statRejSub">0 rejections</div>
+            </div>
+        </div>
+
+        <!-- Pipeline-Übersicht -->
+        <div class="card" style="margin-bottom:16px">
+            <div class="card-title">Pipeline Overview</div>
+            <div class="pipeline-bar" id="pipelineBar"></div>
+            <div class="pipeline-legend" id="pipelineLegend"></div>
+        </div>
+
+        <!-- Charts: 2 Spalten -->
+        <div class="charts-grid">
+
+            <!-- Donut-Chart: Status-Verteilung -->
+            <div class="card">
+                <div class="card-title">Status Distribution</div>
+                <div class="donut-wrap">
+                    <svg id="donutSvg" class="donut-svg" viewBox="0 0 140 140"></svg>
+                    <div id="donutLegend" class="donut-legend"></div>
+                </div>
+            </div>
+
+            <!-- Conversion Funnel -->
+            <div class="card">
+                <div class="card-title">Conversion Funnel</div>
+                <div id="funnelContainer"></div>
+            </div>
+
+        </div>
+
+        <div class="charts-grid">
+
+            <!-- Bewerbungen pro Monat -->
+            <div class="card">
+                <div class="card-title">Applications per Month</div>
+                <div id="monthlyChartContainer"></div>
+            </div>
+
+            <!-- Internship vs Working Student -->
+            <div class="card">
+                <div class="card-title">Internship vs Working Student</div>
+                <div id="typeDistContainer"></div>
+            </div>
+
+        </div>
+
+        <!-- Period Distribution (nur wenn Zeiträume existieren) -->
+        <div class="card" id="periodDistCard" style="display:none; margin-top:16px">
+            <div class="card-title">Distribution by Period</div>
+            <div id="periodDistContainer"></div>
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="/js/navigation.js"></script>
+    <script src="/js/analytics.js"></script>
+
+</body>
+</html>

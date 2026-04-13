@@ -1,0 +1,151 @@
+<!--
+  =============================================================
+   index.html — Startseite / Navigation Hub
+  =============================================================
+
+   Die Hauptseite nach dem Login.
+   Zeigt:
+     - Begrüßung mit dem Username
+     - Quick-Stats (Gesamtzahl, Interviews, Offers)
+     - Links zu allen anderen Seiten
+  =============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Tracker — Home</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation (wird von navigation.js befüllt) -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <!-- Seiteninhalt -->
+    <div class="page-container">
+
+        <!-- Begrüßung -->
+        <div class="page-header">
+            <h1 class="page-title" id="welcomeTitle">Welcome!</h1>
+            <p class="page-subtitle">Here's an overview of your application status.</p>
+        </div>
+
+        <!-- Quick-Stats -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-label">Total</div>
+                <div class="stat-value" id="statTotal" style="color: var(--accent)">–</div>
+                <div class="stat-sub">Applications</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Interviews</div>
+                <div class="stat-value" id="statInterviews" style="color: var(--orange)">–</div>
+                <div class="stat-sub">Scheduled</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Offers</div>
+                <div class="stat-value" id="statOffers" style="color: var(--success)">–</div>
+                <div class="stat-sub">Received</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Rejection Rate</div>
+                <div class="stat-value" id="statRejRate" style="color: var(--danger)">–</div>
+                <div class="stat-sub" id="statRejSub">–</div>
+            </div>
+        </div>
+
+        <!-- Quick-Links zu den anderen Seiten -->
+        <h2 style="font-size:15px; font-weight:600; color:var(--text-muted); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.5px;">
+            Quick Navigation
+        </h2>
+        <div class="quick-links">
+            <a href="/applications.html" class="quick-link-card">
+                <div class="quick-link-icon">📋</div>
+                <div>
+                    <div class="quick-link-title">Applications</div>
+                    <div class="quick-link-desc">View, search and manage all your applications</div>
+                </div>
+            </a>
+            <a href="/application-form.html" class="quick-link-card">
+                <div class="quick-link-icon">➕</div>
+                <div>
+                    <div class="quick-link-title">Add Application</div>
+                    <div class="quick-link-desc">Track a new internship or working student position</div>
+                </div>
+            </a>
+            <a href="/analytics.html" class="quick-link-card">
+                <div class="quick-link-icon">📊</div>
+                <div>
+                    <div class="quick-link-title">Analytics</div>
+                    <div class="quick-link-desc">Charts and statistics about your progress</div>
+                </div>
+            </a>
+            <a href="/map.html" class="quick-link-card">
+                <div class="quick-link-icon">🗺️</div>
+                <div>
+                    <div class="quick-link-title">Map</div>
+                    <div class="quick-link-desc">See where your applications are located</div>
+                </div>
+            </a>
+            <a href="/page7.html" class="quick-link-card">
+                <div class="quick-link-icon">📌</div>
+                <div>
+                    <div class="quick-link-title">More</div>
+                    <div class="quick-link-desc">Additional features coming soon</div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Toast-Benachrichtigung -->
+    <div class="toast" id="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="/js/navigation.js"></script>
+    <script>
+    /**
+     * Startseite initialisieren:
+     * 1. Login prüfen und Navigation aufbauen
+     * 2. Statistiken vom Server laden
+     * 3. Begrüßung mit Username anzeigen
+     */
+    async function initHomePage() {
+        // Navigation und Login prüfen
+        const currentUser = await initPage('home');
+
+        if (!currentUser) {
+            return;  // Nicht eingeloggt, wird zu login.html weitergeleitet
+        }
+
+        // Begrüßung mit Username
+        document.getElementById('welcomeTitle').textContent = 'Welcome, ' + currentUser.username + '!';
+
+        // Statistiken vom Server laden
+        try {
+            const response = await fetch('/api/stats');
+            const result = await response.json();
+
+            if (result.success) {
+                const stats = result.stats;
+
+                // Werte in die Stat-Cards eintragen
+                document.getElementById('statTotal').textContent = stats.total;
+                document.getElementById('statInterviews').textContent = stats.byStatus.interview;
+                document.getElementById('statOffers').textContent = stats.byStatus.offer;
+                document.getElementById('statRejRate').textContent = stats.rejectionRate + '%';
+                document.getElementById('statRejSub').textContent = stats.rejectedCount + ' rejection' + (stats.rejectedCount === 1 ? '' : 's');
+            }
+        } catch (error) {
+            console.log('Fehler beim Laden der Statistiken:', error);
+        }
+    }
+
+    // Seite initialisieren
+    initHomePage();
+    </script>
+
+</body>
+</html>

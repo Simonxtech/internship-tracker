@@ -1,0 +1,111 @@
+<!--
+  =============================================================
+   applications.html — Bewerbungsübersicht (Tabelle)
+  =============================================================
+
+   Zeigt alle Bewerbungen des Users in einer Tabelle.
+   Features:
+     - Suche nach Company, Position, Location
+     - Filter nach Status und Typ
+     - Buttons zum Erstellen, Bearbeiten, Löschen
+     - Sortierbare Spalten
+
+   Nutzt applications.js für die Frontend-Logik.
+  =============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Tracker — Applications</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <!-- Seiteninhalt -->
+    <div class="page-container">
+
+        <!-- Seiten-Header mit "Add New" Button -->
+        <div class="page-header" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+            <div>
+                <h1 class="page-title">Applications</h1>
+                <p class="page-subtitle">Manage all your internship and working student applications.</p>
+            </div>
+            <a href="/application-form.html" class="btn btn-primary">
+                ➕ Add Application
+            </a>
+        </div>
+
+        <!-- Filter-Leiste -->
+        <div class="filters-bar">
+            <input
+                type="text"
+                class="search-input"
+                id="searchInput"
+                placeholder="🔍 Search company, position..."
+                oninput="applyFilters()"
+            >
+            <select class="filter-select" id="filterStatus" onchange="applyFilters()">
+                <option value="">All Statuses</option>
+                <option value="Wishlist">Wishlist</option>
+                <option value="Applied">Applied</option>
+                <option value="Online Assessment">Online Assessment</option>
+                <option value="Interview">Interview</option>
+                <option value="Offer">Offer</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+            <select class="filter-select" id="filterType" onchange="applyFilters()">
+                <option value="">All Types</option>
+                <option value="Internship">Internship</option>
+                <option value="Working Student">Working Student</option>
+            </select>
+        </div>
+
+        <!-- Tabelle -->
+        <div class="table-wrap">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="cursor:pointer" onclick="sortByColumn('company')">Company ↕</th>
+                            <th style="cursor:pointer" onclick="sortByColumn('roleType')">Type ↕</th>
+                            <th style="cursor:pointer" onclick="sortByColumn('position')">Position ↕</th>
+                            <th>Location</th>
+                            <th style="cursor:pointer" onclick="sortByColumn('status')">Status ↕</th>
+                            <th style="cursor:pointer" onclick="sortByColumn('deadline')">Deadline ↕</th>
+                            <th style="cursor:pointer" onclick="sortByColumn('appliedDate')">Applied ↕</th>
+                            <th>Salary</th>
+                            <th>Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Wird von JavaScript befüllt -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Leerer Zustand -->
+            <div class="empty-state" id="emptyState" style="display:none">
+                <p>📋 No applications found.</p>
+                <p style="margin-top:8px">
+                    <a href="/application-form.html" class="btn btn-primary btn-sm">➕ Add your first application</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="/js/navigation.js"></script>
+    <script src="/js/applications.js"></script>
+
+</body>
+</html>

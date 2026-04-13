@@ -1,0 +1,14 @@
+[
+  {
+    "id": "mnxrqyob3a5uec",
+    "username": "simon.appel@web.de",
+    "passwordHash": "5b013d45dcfb3691690712955b6ca0989fc4c352c32310a8295ceb81b4937b7a",
+    "createdAt": "2026-04-13T22:33:15.275Z"
+  },
+  {
+    "id": "mnxrwk776p1v3e",
+    "username": "demo",
+    "passwordHash": "645bf63bef64bc40fdae354a58eb2a9b8a30eae592f1af29a4f2b4fd7ad13059",
+    "createdAt": "2026-04-13T22:37:36.451Z"
+  }
+]

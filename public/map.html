@@ -1,0 +1,99 @@
+<!--
+  =============================================================
+   map.html — Kartenansicht der Bewerbungs-Standorte
+  =============================================================
+
+   Zeigt eine interaktive Karte mit Markern für jeden
+   Bewerbungs-Standort. Benutzt Leaflet.js über CDN.
+
+   Leaflet ist eine Open-Source JavaScript-Library für
+   interaktive Karten. Wir laden sie über ein CDN (Content
+   Delivery Network), also direkt aus dem Internet.
+  =============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Tracker — Map</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Leaflet CSS (von CDN geladen) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <style>
+        /* Karte braucht eine feste Höhe */
+        #mapContainer {
+            width: 100%;
+            height: 500px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .location-list {
+            margin-top: 16px;
+        }
+
+        .location-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .location-item:last-child {
+            border-bottom: none;
+        }
+
+        .location-count {
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            padding: 2px 8px;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <!-- Seiteninhalt -->
+    <div class="page-container">
+
+        <div class="page-header">
+            <h1 class="page-title">Application Map</h1>
+            <p class="page-subtitle">See where your applications are located geographically.</p>
+        </div>
+
+        <!-- Die Karte -->
+        <div id="mapContainer"></div>
+
+        <!-- Liste der Standorte -->
+        <div class="card location-list" id="locationList" style="margin-top:16px">
+            <div class="card-title">Locations</div>
+            <div id="locationListBody">
+                <p style="color:var(--text-light); font-size:12px; padding:12px;">Loading...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="/js/navigation.js"></script>
+    <!-- Leaflet JS (von CDN geladen) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/js/map.js"></script>
+
+</body>
+</html>

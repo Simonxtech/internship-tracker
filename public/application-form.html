@@ -1,0 +1,152 @@
+<!--
+  =============================================================
+   application-form.html — Formular zum Erstellen/Bearbeiten
+  =============================================================
+
+   Diese Seite hat zwei Modi:
+     1. ERSTELLEN: Wenn keine ID in der URL steht → leeres Formular
+     2. BEARBEITEN: Wenn ?id=abc123 in der URL steht → bestehende Daten laden
+
+   Beim Speichern:
+     - Erstellen: POST /api/applications
+     - Bearbeiten: PUT /api/applications/:id
+
+   Nutzt applicationForm.js für die Frontend-Logik.
+  =============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Tracker — Application Form</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <!-- Seiteninhalt -->
+    <div class="page-container" style="max-width:800px">
+
+        <!-- Seiten-Header -->
+        <div class="page-header">
+            <h1 class="page-title" id="formTitle">Add New Application</h1>
+            <p class="page-subtitle" id="formSubtitle">Fill in the details about the position you want to track.</p>
+        </div>
+
+        <!-- Das Formular -->
+        <div class="card">
+            <form id="applicationForm" onsubmit="handleSaveApplication(event)">
+
+                <div class="form-grid">
+
+                    <!-- Company (Pflichtfeld) -->
+                    <div class="form-group">
+                        <label>Company *</label>
+                        <input type="text" id="fieldCompany" required placeholder="e.g. Bosch GmbH">
+                    </div>
+
+                    <!-- Type (Pflichtfeld) -->
+                    <div class="form-group">
+                        <label>Type *</label>
+                        <select id="fieldRoleType" required>
+                            <option value="">— Select —</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Working Student">Working Student</option>
+                        </select>
+                    </div>
+
+                    <!-- Position (Pflichtfeld, volle Breite) -->
+                    <div class="form-group full">
+                        <label>Position / Job Title *</label>
+                        <input type="text" id="fieldPosition" required placeholder="e.g. Software Engineering Intern">
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="fieldLocation" placeholder="e.g. Stuttgart or Remote">
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label>Status *</label>
+                        <select id="fieldStatus" required>
+                            <option value="Wishlist">Wishlist</option>
+                            <option value="Applied">Applied</option>
+                            <option value="Online Assessment">Online Assessment</option>
+                            <option value="Interview">Interview</option>
+                            <option value="Offer">Offer</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+
+                    <!-- Deadline -->
+                    <div class="form-group">
+                        <label>Application Deadline</label>
+                        <input type="date" id="fieldDeadline">
+                    </div>
+
+                    <!-- Applied Date -->
+                    <div class="form-group">
+                        <label>Applied Date</label>
+                        <input type="date" id="fieldAppliedDate">
+                    </div>
+
+                    <!-- Salary -->
+                    <div class="form-group">
+                        <label>Salary</label>
+                        <input type="text" id="fieldSalary" placeholder="e.g. 1,200€/month">
+                    </div>
+
+                    <!-- URL (volle Breite) -->
+                    <div class="form-group full">
+                        <label>Job Posting URL</label>
+                        <input type="url" id="fieldUrl" placeholder="https://...">
+                    </div>
+
+                    <hr class="form-divider">
+
+                    <!-- Period Chips -->
+                    <div class="form-group full">
+                        <label>Assign to Period(s)</label>
+                        <div class="period-chips-wrap" id="periodChipsContainer">
+                            <span style="font-size:12px; color:var(--text-light)">Loading periods...</span>
+                        </div>
+                    </div>
+
+                    <hr class="form-divider">
+
+                    <!-- Notes (volle Breite) -->
+                    <div class="form-group full">
+                        <label>Notes &amp; Next Steps</label>
+                        <textarea id="fieldNotes" placeholder="e.g. Contact: Max Müller — Next: Prepare for coding test"></textarea>
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div style="display:flex; gap:10px; margin-top:20px; justify-content:flex-end; flex-wrap:wrap;">
+                    <button type="button" id="deleteButton" class="btn btn-danger" style="margin-right:auto; display:none;" onclick="handleDeleteApplication()">
+                        🗑️ Delete
+                    </button>
+                    <a href="/applications.html" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary" id="saveButton">💾 Save Application</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="/js/navigation.js"></script>
+    <script src="/js/applicationForm.js"></script>
+
+</body>
+</html>

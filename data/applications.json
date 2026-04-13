@@ -1,0 +1,171 @@
+[
+  {
+    "id": "mnxrwk7h1sgzye",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Bosch",
+    "roleType": "Internship",
+    "position": "Software Engineering Intern",
+    "location": "Stuttgart",
+    "status": "Interview",
+    "deadline": "2026-04-16",
+    "appliedDate": "2026-03-26",
+    "salary": "1,200€/month",
+    "url": "https://www.bosch.de/karriere/",
+    "notes": "Interview with HR on Thursday. Prepare presentation.",
+    "periodIds": [
+      "mnxrwk7hor3v23"
+    ]
+  },
+  {
+    "id": "mnxrwk7ihy5ss8",
+    "userId": "mnxrwk776p1v3e",
+    "company": "McKinsey & Company",
+    "roleType": "Internship",
+    "position": "Business Analyst Intern",
+    "location": "Munich",
+    "status": "Applied",
+    "deadline": "2026-04-14",
+    "appliedDate": "2026-04-08",
+    "salary": "2,800€/month",
+    "url": "",
+    "notes": "Online application submitted. Waiting for response.",
+    "periodIds": [
+      "mnxrwk7h4cmbxc"
+    ]
+  },
+  {
+    "id": "mnxrwk7iap7yc5",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Roland Berger",
+    "roleType": "Internship",
+    "position": "Consulting Intern",
+    "location": "Hamburg",
+    "status": "Online Assessment",
+    "deadline": "2026-04-20",
+    "appliedDate": "2026-04-03",
+    "salary": "2,500€/month",
+    "url": "",
+    "notes": "Case study preparation needed.",
+    "periodIds": [
+      "mnxrwk7h4cmbxc",
+      "mnxrwk7hor3v23"
+    ]
+  },
+  {
+    "id": "mnxrwk7irbkiwg",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Siemens",
+    "roleType": "Working Student",
+    "position": "Working Student Data Science",
+    "location": "Erlangen",
+    "status": "Offer",
+    "deadline": "2026-04-10",
+    "appliedDate": "2026-03-14",
+    "salary": "1,400€/month",
+    "url": "",
+    "notes": "Offer received! Review contract details.",
+    "periodIds": [
+      "mnxrwk7h6qp197"
+    ]
+  },
+  {
+    "id": "mnxrwk7iyvscwv",
+    "userId": "mnxrwk776p1v3e",
+    "company": "BMW Group",
+    "roleType": "Working Student",
+    "position": "Working Student Software Development",
+    "location": "Munich",
+    "status": "Rejected",
+    "deadline": "2026-03-29",
+    "appliedDate": "2026-03-04",
+    "salary": "1,200€/month",
+    "url": "",
+    "notes": "Rejected after first interview round.",
+    "periodIds": [
+      "mnxrwk7h6qp197"
+    ]
+  },
+  {
+    "id": "mnxrwk7ixm3ae3",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Allianz",
+    "roleType": "Working Student",
+    "position": "Working Student Product Management",
+    "location": "Munich",
+    "status": "Wishlist",
+    "deadline": "2026-04-27",
+    "appliedDate": "",
+    "salary": "1,100€/month",
+    "url": "",
+    "notes": "Still working on cover letter.",
+    "periodIds": []
+  },
+  {
+    "id": "mnxrwk7itl2u0c",
+    "userId": "mnxrwk776p1v3e",
+    "company": "SAP",
+    "roleType": "Internship",
+    "position": "UX Design Intern",
+    "location": "Walldorf",
+    "status": "Applied",
+    "deadline": "2026-04-23",
+    "appliedDate": "2026-04-06",
+    "salary": "1,500€/month",
+    "url": "https://www.sap.com/careers",
+    "notes": "Applied via career portal. Portfolio attached.",
+    "periodIds": [
+      "mnxrwk7h4cmbxc"
+    ]
+  },
+  {
+    "id": "mnxrwk7ihf6h7z",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Porsche",
+    "roleType": "Internship",
+    "position": "Marketing Intern",
+    "location": "Stuttgart",
+    "status": "Wishlist",
+    "deadline": "2026-05-03",
+    "appliedDate": "",
+    "salary": "1,300€/month",
+    "url": "",
+    "notes": "Application opens next week.",
+    "periodIds": [
+      "mnxrwk7h4cmbxc"
+    ]
+  },
+  {
+    "id": "mnxrwk7i4an1s9",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Deutsche Bank",
+    "roleType": "Internship",
+    "position": "Finance Intern",
+    "location": "Frankfurt",
+    "status": "Interview",
+    "deadline": "2026-04-12",
+    "appliedDate": "2026-03-19",
+    "salary": "2,000€/month",
+    "url": "",
+    "notes": "Second round interview next Monday. Prepare case.",
+    "periodIds": [
+      "mnxrwk7hor3v23"
+    ]
+  },
+  {
+    "id": "mnxrwk7it0bzv5",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Daimler Truck",
+    "roleType": "Working Student",
+    "position": "Working Student Supply Chain",
+    "location": "Stuttgart",
+    "status": "Applied",
+    "deadline": "2026-04-18",
+    "appliedDate": "2026-04-10",
+    "salary": "1,250€/month",
+    "url": "",
+    "notes": "Applied through LinkedIn.",
+    "periodIds": [
+      "mnxrwk7h6qp197"
+    ]
+  }
+]
