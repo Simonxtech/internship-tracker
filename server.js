@@ -51,18 +51,12 @@ app.use(express.json());
  * Session-Middleware: Hält den Login-Status des Users fest.
  * Jeder Browser bekommt eine eindeutige Session-ID als Cookie.
  * So weiß der Server bei jeder Anfrage, wer eingeloggt ist.
- * 
- * WICHTIG: Wir speichern Sessions in einer JSON-Datei (FileSessionStore)
- * statt im RAM. Das bedeutet Sessions bleiben auch nach Server-Neustart erhalten.
- * Das ist besonders wichtig auf Hosting-Plattformen wie Render.com für Free-Tier.
  */
-const sessionStore = new FileSessionStore();
-
 app.use(session({
-    store: sessionStore,
     secret: 'internship-tracker-geheim-2026',
     resave: false,
     saveUninitialized: false,
+    store: new FileSessionStore(),   // Sessions in JSON-Datei speichern statt RAM
     cookie: {
         maxAge: 1000 * 60 * 60 * 24  // Session läuft nach 24 Stunden ab
     }
@@ -85,7 +79,6 @@ app.use(express.static(path.join(__dirname, 'public')));
  *   /api/applications/... → CRUD für Bewerbungen
  *   /api/periods/...      → CRUD für Zeiträume
  *   /api/stats            → Statistiken
- *   /api/quiz             → Quiz-Fragen und Ergebnisse
  */
 app.use('/api/auth', authRoutes);
 app.use('/api/applications', applicationRoutes);

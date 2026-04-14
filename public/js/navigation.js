@@ -65,21 +65,20 @@ function buildNavigation(user, activePage) {
     const avatarLetter = user.username.charAt(0).toUpperCase();
 
     // Alle Navigations-Links definieren
-    // Jeder Eintrag hat: id (zum Markieren), href (Link), label (Anzeigename)
+    // Jeder Eintrag hat: id (zum Markieren), href (Link), label (Anzeigename), icon (Emoji)
     const navigationLinks = [
-        { id: 'home',          href: '/index.html',            label: 'Home' },
+        { id: 'home',          href: '/index.html',            label: 'Home'         },
         { id: 'applications',  href: '/applications.html',     label: 'Applications' },
-        { id: 'add',           href: '/application-form.html', label: 'Add' },
-        { id: 'analytics',     href: '/analytics.html',        label: 'Analytics' },
-        { id: 'map',           href: '/map.html',              label: 'Map' },
-        { id: 'page7',         href: '/page7.html',            label: 'Career Quiz' }
+        { id: 'add',           href: '/application-form.html', label: 'Add New'      },
+        { id: 'analytics',     href: '/analytics.html',        label: 'Analytics'    },
+        { id: 'map',           href: '/map.html',              label: 'Map'          },
+        { id: 'page7',         href: '/page7.html',            label: 'Assessment'   }
     ];
 
     // Links als HTML-Strings bauen
     let linksHtml = '';
     for (let i = 0; i < navigationLinks.length; i++) {
         const link = navigationLinks[i];
-        // Prüfen ob dieser Link die aktive Seite ist
         const isActive = (link.id === activePage);
         const activeClass = isActive ? ' active' : '';
 
@@ -92,6 +91,7 @@ function buildNavigation(user, activePage) {
     const navigationHtml = ''
         + '<div class="navbar-inner">'
         +   '<a href="/index.html" class="navbar-brand">'
+        +     '<img src="/img/logo.png" alt="Internship Tracker" style="height:32px;">'
         +     '<span class="navbar-title">Internship Tracker</span>'
         +   '</a>'
         +   '<div class="navbar-links" id="navLinks">'
@@ -102,7 +102,9 @@ function buildNavigation(user, activePage) {
         +       '<div class="user-avatar">' + avatarLetter + '</div>'
         +       '<span>' + escapeHtml(user.username) + '</span>'
         +     '</div>'
-        +     '<button class="btn btn-logout" onclick="doLogout()" title="Logout">Log out</button>'
+        +     '<button class="btn btn-ghost" onclick="doLogout()" style="font-size:13px; color:var(--text-muted); padding:6px 12px;">'
+        +       'Log out'
+        +     '</button>'
         +   '</div>'
         + '</div>';
 

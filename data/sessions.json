@@ -1,0 +1,28 @@
+{
+  "-oWkzJD5YSoiTghoybe9LLBLXVfylBr8": {
+    "cookie": {
+      "originalMaxAge": 86400000,
+      "expires": "2026-04-15T15:59:07.680Z",
+      "httpOnly": true,
+      "path": "/"
+    },
+    "user": {
+      "id": "mnxrwk776p1v3e",
+      "username": "demo",
+      "createdAt": "2026-04-13T22:37:36.451Z"
+    }
+  },
+  "fRV8_cIM7ew1o0MadlJyn9snb1TiiDiW": {
+    "cookie": {
+      "originalMaxAge": 86400000,
+      "expires": "2026-04-15T16:00:47.148Z",
+      "httpOnly": true,
+      "path": "/"
+    },
+    "user": {
+      "id": "mnxrwk776p1v3e",
+      "username": "demo",
+      "createdAt": "2026-04-13T22:37:36.451Z"
+    }
+  }
+}

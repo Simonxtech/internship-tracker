@@ -21,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Tracker — Application Form</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="/img/logo.png">
 </head>
 <body>
 
@@ -46,6 +47,7 @@
                     <div class="form-group">
                         <label>Company *</label>
                         <input type="text" id="fieldCompany" required placeholder="e.g. Bosch GmbH">
+                        <div class="field-error" id="errorCompany" style="color:#dc2626; font-size:12px; margin-top:3px; display:none;"></div>
                     </div>
 
                     <!-- Type (Pflichtfeld) -->
@@ -56,18 +58,28 @@
                             <option value="Internship">Internship</option>
                             <option value="Working Student">Working Student</option>
                         </select>
+                        <div class="field-error" id="errorRoleType" style="color:#dc2626; font-size:12px; margin-top:3px; display:none;"></div>
                     </div>
 
                     <!-- Position (Pflichtfeld, volle Breite) -->
                     <div class="form-group full">
                         <label>Position / Job Title *</label>
                         <input type="text" id="fieldPosition" required placeholder="e.g. Software Engineering Intern">
+                        <div class="field-error" id="errorPosition" style="color:#dc2626; font-size:12px; margin-top:3px; display:none;"></div>
                     </div>
 
                     <!-- Location -->
                     <div class="form-group">
-                        <label>Location</label>
+                        <label>City / Location</label>
                         <input type="text" id="fieldLocation" placeholder="e.g. Stuttgart or Remote">
+                        <div class="field-error" id="errorLocation" style="color:#dc2626; font-size:12px; margin-top:3px; display:none;"></div>
+                    </div>
+
+                    <!-- Country -->
+                    <div class="form-group">
+                        <label>Country</label>
+                        <input type="text" id="fieldCountry" placeholder="e.g. Germany">
+                        <div class="field-error" id="errorCountry" style="color:#dc2626; font-size:12px; margin-top:3px; display:none;"></div>
                     </div>
 
                     <!-- Status -->
@@ -85,8 +97,9 @@
 
                     <!-- Deadline -->
                     <div class="form-group">
-                        <label>Application Deadline</label>
+                        <label>Acceptance Deadline</label>
                         <input type="date" id="fieldDeadline">
+                        <div class="field-error" id="errorDeadline" style="color:#dc2626; font-size:12px; margin-top:3px; display:none;"></div>
                     </div>
 
                     <!-- Applied Date -->
@@ -97,14 +110,16 @@
 
                     <!-- Salary -->
                     <div class="form-group">
-                        <label>Salary</label>
-                        <input type="text" id="fieldSalary" placeholder="e.g. 1,200€/month">
+                        <label>Monthly Salary (€)</label>
+                        <input type="number" id="fieldSalary" min="0" max="20000" step="50" placeholder="e.g. 1200">
+                        <div class="field-error" id="errorSalary" style="color:#dc2626; font-size:12px; margin-top:3px; display:none;"></div>
                     </div>
 
                     <!-- URL (volle Breite) -->
                     <div class="form-group full">
                         <label>Job Posting URL</label>
-                        <input type="url" id="fieldUrl" placeholder="https://...">
+                        <input type="text" id="fieldUrl" placeholder="https://...">
+                        <div class="field-error" id="errorUrl" style="color:#dc2626; font-size:12px; margin-top:3px; display:none;"></div>
                     </div>
 
                     <hr class="form-divider">
@@ -123,6 +138,7 @@
                     <div class="form-group full">
                         <label>Notes &amp; Next Steps</label>
                         <textarea id="fieldNotes" placeholder="e.g. Contact: Max Müller — Next: Prepare for coding test"></textarea>
+                        <div class="field-error" id="errorNotes" style="color:#dc2626; font-size:12px; margin-top:3px; display:none;"></div>
                     </div>
 
                 </div>
@@ -130,10 +146,10 @@
                 <!-- Buttons -->
                 <div style="display:flex; gap:10px; margin-top:20px; justify-content:flex-end; flex-wrap:wrap;">
                     <button type="button" id="deleteButton" class="btn btn-danger" style="margin-right:auto; display:none;" onclick="handleDeleteApplication()">
-                        🗑️ Delete
+                        Delete
                     </button>
                     <a href="/applications.html" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-primary" id="saveButton">💾 Save Application</button>
+                    <button type="submit" class="btn btn-primary" id="saveButton">Save Application</button>
                 </div>
 
             </form>

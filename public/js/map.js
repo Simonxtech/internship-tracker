@@ -89,7 +89,8 @@ async function loadAndShowLocations() {
             }
 
             // Koordinaten per Geocoding ermitteln
-            const coordinates = await geocodeLocation(group.location);
+            // Übergebe auch das Land für korrekte internationale Suche
+            const coordinates = await geocodeLocation(group.location, group.country);
 
             if (coordinates) {
                 // Marker auf die Karte setzen
@@ -116,8 +117,10 @@ async function loadAndShowLocations() {
 
 
 /**
- * Gruppiert Bewerbungen nach ihrem Standort.
- * Beispiel: 3 Bewerbungen in "Stuttgart" → { location: "Stuttgart", count: 3, applications: [...] }
+ * Gruppiert Bewerbungen nach Standort + Land.
+ * Beispiel: 3 Bewerbungen in "Stuttgart, Germany" → ein Gruppen-Eintrag
+ * Benutzt "location + country" als Gruppenkey damit z.B. London (UK) und
+ * London (Canada) als separate Einträge behandelt werden.
  */
 function groupByLocation(listOfApplications) {
     const groups = {};
@@ -125,17 +128,22 @@ function groupByLocation(listOfApplications) {
     for (let i = 0; i < listOfApplications.length; i++) {
         const app = listOfApplications[i];
         const location = app.location || 'Unknown';
+        const country = app.country || '';
 
-        if (!groups[location]) {
-            groups[location] = {
+        // Gruppenkey: "Stuttgart" oder "Stuttgart|Germany" wenn country vorhanden
+        const groupKey = country ? (location + '|' + country) : location;
+
+        if (!groups[groupKey]) {
+            groups[groupKey] = {
                 location: location,
+                country: country,
                 count: 0,
                 applications: []
             };
         }
 
-        groups[location].count = groups[location].count + 1;
-        groups[location].applications.push(app);
+        groups[groupKey].count = groups[groupKey].count + 1;
+        groups[groupKey].applications.push(app);
     }
 
     // In ein Array umwandeln und nach Anzahl sortieren
@@ -195,13 +203,23 @@ function renderLocationList(locationGroups) {
  * Geocoding: Wandelt einen Ortsnamen in Koordinaten um.
  * Benutzt die Nominatim-API von OpenStreetMap (kostenlos).
  *
- * @param {string} locationName - z.B. "Stuttgart"
+ * Wenn ein Land-Name angegeben wird: Suche als "City, Country"
+ * Wenn kein Land: Suche nur den Stadt-Namen (kein Germany-Hardcoding mehr)
+ *
+ * @param {string} locationName - z.B. "Stuttgart" oder "London"
+ * @param {string} countryName - z.B. "Germany" oder "UK" (optional)
  * @returns {object|null} - { lat, lon } oder null wenn nicht gefunden
  */
-async function geocodeLocation(locationName) {
+async function geocodeLocation(locationName, countryName) {
     try {
+        // Suchanfrage zusammenbauen: Mit oder ohne Land
+        var searchQuery = locationName;
+        if (countryName && countryName.trim() !== '') {
+            searchQuery = locationName + ', ' + countryName;
+        }
+
         // URL für die Nominatim-API zusammenbauen
-        const encodedLocation = encodeURIComponent(locationName + ', Germany');
+        const encodedLocation = encodeURIComponent(searchQuery);
         const apiUrl = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodedLocation + '&limit=1';
 
         const response = await fetch(apiUrl, {

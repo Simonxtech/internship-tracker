@@ -1,108 +1,136 @@
 /**
  * =============================================================
- *  utils/fileSessionStore.js — Einfacher Datei-basierter Session-Store
+ *  utils/fileSessionStore.js — Datei-basierter Session-Speicher
  * =============================================================
  *
- *  Dieser Store speichert Express-Sessions in einer JSON-Datei
- *  statt im RAM. So bleiben Sessions auch nach Server-Restart erhalten.
+ *  Standardmäßig speichert express-session die Sessions im RAM.
+ *  Wenn der Server neu startet (z.B. auf Render.com nach 15min Sleep),
+ *  gehen alle Sessions verloren — der User ist ausgeloggt.
  *
- *  Wird in server.js verwendet um Sessions persistent zu machen.
+ *  Diese Klasse speichert Sessions in einer JSON-Datei auf der Festplatte.
+ *  So bleiben Sessions auch nach einem Neustart erhalten.
+ *
+ *  WICHTIG: Die Klasse muss session.Store erweitern damit
+ *  express-session die createSession()-Methode automatisch erbt.
  * =============================================================
  */
 
 const fs = require('fs');
 const path = require('path');
-const { EventEmitter } = require('events');
+const session = require('express-session');
 
-class FileSessionStore extends EventEmitter {
-    constructor(filePath) {
+// Pfad zur JSON-Datei wo die Sessions gespeichert werden
+const SESSIONS_FILE = path.join(__dirname, '../data/sessions.json');
+
+
+/**
+ * FileSessionStore — erweiter die offizielle express-session Store-Klasse.
+ * Muss get(), set() und destroy() implementieren.
+ */
+class FileSessionStore extends session.Store {
+
+    constructor() {
         super();
-        this.filePath = filePath || path.join(__dirname, '../data/sessions.json');
-        this.sessions = {};
-        this.loadSessions();
-    }
 
-    // Alle Sessions aus der Datei laden
-    loadSessions() {
-        try {
-            if (fs.existsSync(this.filePath)) {
-                const data = fs.readFileSync(this.filePath, 'utf8');
-                this.sessions = JSON.parse(data);
-            } else {
-                this.sessions = {};
-            }
-        } catch (error) {
-            console.log('Fehler beim Laden der Sessions:', error.message);
-            this.sessions = {};
+        // Sicherstellen dass die sessions.json existiert
+        if (!fs.existsSync(SESSIONS_FILE)) {
+            fs.writeFileSync(SESSIONS_FILE, '{}', 'utf8');
         }
     }
 
-    // Sessions in Datei speichern
-    saveSessions() {
+
+    /**
+     * Alle Sessions aus der Datei laden.
+     * Gibt ein leeres Objekt zurück wenn die Datei leer oder kaputt ist.
+     */
+    _readSessions() {
         try {
-            const dir = path.dirname(this.filePath);
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir, { recursive: true });
+            const content = fs.readFileSync(SESSIONS_FILE, 'utf8');
+            if (!content || content.trim() === '') {
+                return {};
             }
-            fs.writeFileSync(this.filePath, JSON.stringify(this.sessions, null, 2), 'utf8');
+            return JSON.parse(content);
+        } catch (error) {
+            // Wenn die Datei kaputt ist: leeres Objekt zurückgeben
+            return {};
+        }
+    }
+
+
+    /**
+     * Alle Sessions in die Datei speichern.
+     */
+    _writeSessions(sessions) {
+        try {
+            fs.writeFileSync(SESSIONS_FILE, JSON.stringify(sessions, null, 2), 'utf8');
         } catch (error) {
             console.log('Fehler beim Speichern der Sessions:', error.message);
         }
     }
 
-    // Erforderlich von express-session: get(sid, callback)
+
+    /**
+     * get: Eine Session anhand der Session-ID laden.
+     * Wird bei JEDER Anfrage aufgerufen um die Session zu prüfen.
+     *
+     * @param {string} sid - Session-ID
+     * @param {function} callback - callback(fehler, session)
+     */
     get(sid, callback) {
-        const session = this.sessions[sid];
-        if (session) {
-            // Prüfe ob Session abgelaufen ist
-            if (session.expires && new Date(session.expires) < new Date()) {
-                delete this.sessions[sid];
-                this.saveSessions();
-                callback(null, null);
-            } else {
-                callback(null, session);
+        const sessions = this._readSessions();
+        const sessionData = sessions[sid];
+
+        // Session nicht gefunden → null zurückgeben (User muss neu einloggen)
+        if (!sessionData) {
+            return callback(null, null);
+        }
+
+        // Prüfen ob die Session abgelaufen ist
+        if (sessionData.cookie && sessionData.cookie.expires) {
+            const expiresDate = new Date(sessionData.cookie.expires);
+            if (expiresDate < new Date()) {
+                // Session abgelaufen → löschen und null zurückgeben
+                delete sessions[sid];
+                this._writeSessions(sessions);
+                return callback(null, null);
             }
-        } else {
-            callback(null, null);
         }
+
+        return callback(null, sessionData);
     }
 
-    // Erforderlich von express-session: set(sid, session, callback)
+
+    /**
+     * set: Eine Session speichern oder aktualisieren.
+     * Wird aufgerufen wenn sich der Session-Inhalt ändert (z.B. nach Login).
+     *
+     * @param {string} sid - Session-ID
+     * @param {object} session - Die Session-Daten
+     * @param {function} callback - callback(fehler)
+     */
     set(sid, session, callback) {
-        this.sessions[sid] = session;
-        this.saveSessions();
-        if (callback) {
-            callback(null);
-        }
+        const sessions = this._readSessions();
+        sessions[sid] = session;
+        this._writeSessions(sessions);
+        return callback(null);
     }
 
-    // Erforderlich von express-session: destroy(sid, callback)
+
+    /**
+     * destroy: Eine Session löschen.
+     * Wird beim Logout aufgerufen.
+     *
+     * @param {string} sid - Session-ID
+     * @param {function} callback - callback(fehler)
+     */
     destroy(sid, callback) {
-        delete this.sessions[sid];
-        this.saveSessions();
-        if (callback) {
-            callback(null);
-        }
-    }
-
-    // Optional: clear() - Alle Sessions löschen
-    clear(callback) {
-        this.sessions = {};
-        this.saveSessions();
-        if (callback) {
-            callback(null);
-        }
-    }
-
-    // Optional: length - Anzahl der Sessions
-    length(callback) {
-        const count = Object.keys(this.sessions).length;
-        if (callback) {
-            callback(null, count);
-        } else {
-            return count;
-        }
+        const sessions = this._readSessions();
+        delete sessions[sid];
+        this._writeSessions(sessions);
+        return callback(null);
     }
 }
 
+
+// --- Klasse exportieren ---
 module.exports = FileSessionStore;

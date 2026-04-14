@@ -3,124 +3,166 @@
    page7.html — Career Assessment Quiz
   =============================================================
 
-   Interaktives Quiz für berufliches Profiling
-   =============================================================
+   20 Fragen, 50 Karriere-Kategorien.
+   Ergebnis wird per POST /api/quiz/results gespeichert
+   und beim nächsten Besuch per GET /api/quiz/results geladen.
+
+   Nutzt quiz.js für die gesamte Quiz-Logik.
+   Chart.js wird für die Ergebnis-Charts geladen.
+  =============================================================
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Career Assessment Quiz</title>
+    <title>Internship Tracker — Career Assessment</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/quiz.css">
+    <link rel="icon" type="image/png" href="/img/logo.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <!-- Navigation (wird von navigation.js befüllt) -->
+    <!-- Konfetti-Canvas -->
+    <canvas id="quizConfetti"></canvas>
+
+    <!-- Career Detail Modal -->
+    <div class="quiz-modal-bg" id="quizModal" onclick="closeCareerModal(event)">
+        <div class="quiz-modal-box" onclick="event.stopPropagation()">
+            <button class="quiz-modal-close" onclick="document.getElementById('quizModal').classList.remove('open')">&times;</button>
+            <h2 id="modalTitle">Career</h2>
+            <div class="quiz-modal-label">Description</div>
+            <div class="quiz-modal-text" id="modalDesc"></div>
+            <div class="quiz-modal-label">Typical Entry Positions</div>
+            <div class="quiz-modal-text" id="modalPos"></div>
+            <div class="quiz-modal-label">Key Skills</div>
+            <div class="quiz-modal-text" id="modalSkills"></div>
+            <div class="quiz-modal-label">Estimated Entry Salary (Germany)</div>
+            <div class="quiz-modal-text" id="modalSalary"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
     <nav class="navbar" id="navbar"></nav>
 
     <!-- Seiteninhalt -->
     <div class="page-container">
+        <div class="quiz-wrap">
 
-        <!-- INTRO -->
-        <div id="intro" class="quiz-intro">
-            <h1 class="page-title">Career Assessment Quiz</h1>
-            <p class="page-subtitle">Answer 20 questions about your working style and interests. Get a personalized ranking across 50 business career fields.</p>
-            <button class="btn btn-primary" onclick="startQuiz()">Start Assessment</button>
-        </div>
+            <!-- Seiten-Header -->
+            <div class="page-header">
+                <h1 class="page-title">Career Assessment</h1>
+                <p class="page-subtitle">20 questions — personalized ranking across 50 business career fields.</p>
+            </div>
 
-        <!-- QUIZ -->
-        <div id="quiz" class="quiz-container hidden">
-            <div class="quiz-progress">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progBar" style="width: 0%"></div>
+            <!-- Intro -->
+            <div id="quizIntro" class="card">
+                <div id="quizPrevBanner" class="quiz-prev-banner" style="display:none;">
+                    <!-- Wird von JavaScript befüllt wenn ein altes Ergebnis existiert -->
                 </div>
-                <div class="progress-text">
-                    <span id="progPct">0%</span>
+                <h2 style="font-size:18px; font-weight:600; margin-bottom:8px;">Business Career Assessment</h2>
+                <p style="color:var(--text-light); font-size:14px; margin-bottom:20px;">
+                    Answer 20 questions about your working style, interests, and goals.
+                    Get a personalized ranking across <strong>50 specific business career fields</strong>.
+                </p>
+                <button class="btn btn-primary" style="width:100%; justify-content:center; padding:12px;" onclick="startQuiz()">
+                    Start Assessment
+                </button>
+            </div>
+
+            <!-- Quiz -->
+            <div id="quizSection" style="display:none;">
+                <div class="card">
+                    <div class="quiz-progress-row">
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quizProgBar"></div>
+                        </div>
+                        <span class="quiz-progress-pct" id="quizProgPct">0%</span>
+                    </div>
+                    <p style="color:var(--text-light); font-weight:600; font-size:13px; margin-bottom:12px;">
+                        Question <span id="quizQNum">1</span> of 20
+                    </p>
+                    <div class="quiz-q-box" id="quizQBox">
+                        <h2 id="quizQText" style="font-size:17px; margin:14px 0 18px;"></h2>
+                        <div id="quizQOpts"></div>
+                    </div>
+                    <div id="quizPrevAns" class="quiz-prev-answer" style="display:none;"></div>
+                    <div class="quiz-nav-row">
+                        <button id="quizBackBtn" class="btn btn-secondary" onclick="quizGoBack()">Back</button>
+                    </div>
                 </div>
             </div>
 
-            <p class="quiz-counter">Question <span id="qNum">1</span> of 20</p>
+            <!-- Ergebnisse -->
+            <div id="quizResults" style="display:none;">
 
-            <div class="quiz-box" id="qBox">
-                <h2 id="qText"></h2>
-                <div id="qOpts" class="quiz-options"></div>
+                <!-- Profil-Box -->
+                <div class="quiz-profile-box quiz-fade-in">
+                    <div class="quiz-profile-emoji" id="quizProfEmoji"></div>
+                    <div class="quiz-profile-type" id="quizProfType"></div>
+                    <div class="quiz-profile-desc" id="quizProfDesc"></div>
+                </div>
+
+                <!-- Top Career Matches -->
+                <h2 style="text-align:center; margin-bottom:16px;" class="quiz-fade-in">Your Top Career Matches</h2>
+                <div id="quizTopCards" class="quiz-fade-in"></div>
+
+                <!-- Charts -->
+                <div class="quiz-chart-box quiz-fade-in">
+                    <h3>Top 10 Career Scores</h3>
+                    <canvas id="quizChartBar"></canvas>
+                </div>
+                <div class="quiz-chart-box quiz-fade-in">
+                    <h3>Your Profile Radar</h3>
+                    <canvas id="quizChartRadar"></canvas>
+                </div>
+                <div class="quiz-chart-box quiz-fade-in">
+                    <h3>Interest Area Distribution</h3>
+                    <canvas id="quizChartPie"></canvas>
+                </div>
+
+                <!-- Vollständige Score-Tabelle -->
+                <div class="card quiz-fade-in" style="margin-top:20px;">
+                    <h3 style="font-size:15px; margin-bottom:4px;">
+                        Full Score Breakdown
+                        <span style="font-size:12px; color:var(--text-light); font-weight:400;">(click a career for details)</span>
+                    </h3>
+                    <table class="quiz-score-table">
+                        <thead>
+                            <tr>
+                                <th>Career Path</th>
+                                <th style="width:70px; text-align:center;">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="quizScoreTable"></tbody>
+                    </table>
+                </div>
+
+                <!-- Antworten -->
+                <div class="card quiz-fade-in" style="margin-top:16px;">
+                    <button class="quiz-acc-btn" onclick="quizToggleAcc('quizAnswersAcc')">Your Answers (click to expand)</button>
+                    <div class="quiz-acc-body" id="quizAnswersAcc"></div>
+                </div>
+
+                <!-- Neu starten -->
+                <div style="margin-top:20px; margin-bottom:32px;" class="quiz-fade-in">
+                    <button class="btn btn-secondary" style="width:100%; justify-content:center; padding:12px;" onclick="restartQuiz()">
+                        Take Assessment Again
+                    </button>
+                </div>
+
             </div>
 
-            <div class="quiz-controls">
-                <button class="btn btn-secondary" id="backBtn" onclick="goBack()" disabled>Back</button>
-            </div>
         </div>
-
-        <!-- RESULTS -->
-        <div id="results" class="quiz-results hidden">
-
-            <!-- Profil Card -->
-            <div class="profile-card fade-in">
-                <div class="profile-emoji" id="profEmoji"></div>
-                <h2 class="profile-type" id="profType"></h2>
-                <p class="profile-desc" id="profDesc"></p>
-            </div>
-
-            <h2 style="text-align: center; margin-top: 30px;" class="fade-in">Top Career Matches</h2>
-
-            <!-- Top 3 Cards -->
-            <div id="topCards" class="top-cards-grid fade-in"></div>
-
-            <!-- Charts -->
-            <div class="chart-box fade-in">
-                <h3>Top 10 Career Scores</h3>
-                <canvas id="chartBar"></canvas>
-            </div>
-
-            <div class="chart-box fade-in">
-                <h3>Your Profile Radar</h3>
-                <canvas id="chartRadar"></canvas>
-            </div>
-
-            <!-- Score Table -->
-            <h3 style="margin-top: 30px;" class="fade-in">Full Score Breakdown</h3>
-            <table class="scores-table fade-in">
-                <thead>
-                    <tr>
-                        <th>Career Path</th>
-                        <th style="width: 80px; text-align: center;">Score</th>
-                    </tr>
-                </thead>
-                <tbody id="scoreTable"></tbody>
-            </table>
-
-            <!-- Actions -->
-            <div class="results-actions fade-in">
-                <button class="btn btn-primary" onclick="jumpToApplications()">Browse Jobs</button>
-                <button class="btn btn-secondary" onclick="location.reload()">Take Again</button>
-            </div>
-
-        </div>
-
     </div>
 
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
-    <!-- Scripts -->
+    <!-- JavaScript -->
     <script src="/js/navigation.js"></script>
     <script src="/js/quiz.js"></script>
-
-</body>
-</html>
-    <script src="/js/navigation.js"></script>
-    <script>
-    /**
-     * Seite initialisieren
-     */
-    async function initPage7() {
-        await initPage('page7');
-    }
-    initPage7();
-    </script>
 
 </body>
 </html>

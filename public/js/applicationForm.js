@@ -149,6 +149,7 @@ async function loadExistingApplication(applicationId) {
             document.getElementById('fieldRoleType').value = app.roleType || '';
             document.getElementById('fieldPosition').value = app.position || '';
             document.getElementById('fieldLocation').value = app.location || '';
+            document.getElementById('fieldCountry').value = app.country || '';
             document.getElementById('fieldStatus').value = app.status || 'Wishlist';
             document.getElementById('fieldDeadline').value = app.deadline || '';
             document.getElementById('fieldAppliedDate').value = app.appliedDate || '';
@@ -173,11 +174,126 @@ async function loadExistingApplication(applicationId) {
 
 
 /**
+ * Zeigt eine Fehlermeldung unter einem Formularfeld.
+ *
+ * @param {string} fieldId - ID des Feldes (z.B. "Company" → sucht "errorCompany")
+ * @param {string} message - Die anzuzeigende Fehlermeldung
+ */
+function showFieldError(fieldId, message) {
+    var el = document.getElementById('error' + fieldId);
+    if (el) {
+        el.textContent = message;
+        el.style.display = 'block';
+    }
+}
+
+
+/**
+ * Versteckt alle Fehlermeldungen im Formular.
+ */
+function clearFieldErrors() {
+    var errors = document.querySelectorAll('.field-error');
+    for (var i = 0; i < errors.length; i++) {
+        errors[i].style.display = 'none';
+    }
+}
+
+
+/**
+ * Validiert alle Formularfelder vor dem Absenden.
+ * Zeigt Fehlermeldungen direkt unter den Feldern an.
+ * Gibt true zurück wenn alles gültig ist, sonst false.
+ */
+function validateForm() {
+    clearFieldErrors();
+    var isValid = true;
+
+    var company = document.getElementById('fieldCompany').value.trim();
+    var position = document.getElementById('fieldPosition').value.trim();
+    var roleType = document.getElementById('fieldRoleType').value;
+    var location = document.getElementById('fieldLocation').value.trim();
+    var salary = document.getElementById('fieldSalary').value;
+    var url = document.getElementById('fieldUrl').value.trim();
+    var deadline = document.getElementById('fieldDeadline').value;
+    var appliedDate = document.getElementById('fieldAppliedDate').value;
+    var notes = document.getElementById('fieldNotes').value;
+
+    // Company: Pflicht, 1-100 Zeichen
+    if (!company || company.length < 1) {
+        showFieldError('Company', 'Company name is required.');
+        isValid = false;
+    } else if (company.length > 100) {
+        showFieldError('Company', 'Company name must be 100 characters or less.');
+        isValid = false;
+    }
+
+    // Position: Pflicht, 2-200 Zeichen
+    if (!position || position.length < 2) {
+        showFieldError('Position', 'Position must be at least 2 characters.');
+        isValid = false;
+    } else if (position.length > 200) {
+        showFieldError('Position', 'Position must be 200 characters or less.');
+        isValid = false;
+    }
+
+    // RoleType: Pflicht
+    if (!roleType || roleType === '') {
+        showFieldError('RoleType', 'Please select a type (Internship or Working Student).');
+        isValid = false;
+    }
+
+    // Location: Optional, maximal 100 Zeichen
+    if (location && location.length > 100) {
+        showFieldError('Location', 'Location must be 100 characters or less.');
+        isValid = false;
+    }
+
+    // Salary: Wenn ausgefüllt, muss eine Zahl zwischen 0 und 20000 sein
+    if (salary !== '' && salary !== undefined) {
+        var salaryNum = Number(salary);
+        if (isNaN(salaryNum) || salaryNum < 0 || salaryNum > 20000) {
+            showFieldError('Salary', 'Salary must be a number between 0 and 20,000.');
+            isValid = false;
+        }
+    }
+
+    // URL: Wenn ausgefüllt, muss mit http:// oder https:// anfangen
+    if (url && url !== '') {
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            showFieldError('Url', 'URL must start with http:// or https://');
+            isValid = false;
+        }
+    }
+
+    // Deadline und Applied Date: Applied Date darf nicht nach Deadline liegen
+    if (deadline && appliedDate) {
+        if (appliedDate > deadline) {
+            showFieldError('Deadline', 'Applied date cannot be after the acceptance deadline.');
+            isValid = false;
+        }
+    }
+
+    // Notes: Maximal 1000 Zeichen
+    if (notes && notes.length > 1000) {
+        showFieldError('Notes', 'Notes must be 1,000 characters or less.');
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+
+/**
  * Wird aufgerufen wenn das Formular abgeschickt wird (Speichern-Button).
  * Entscheidet ob POST (neu) oder PUT (bearbeiten) verwendet wird.
  */
 async function handleSaveApplication(event) {
     event.preventDefault();
+
+    // Validierung: Abbrechen wenn Fehler gefunden wurden
+    if (!validateForm()) {
+        return;
+    }
 
     const saveButton = document.getElementById('saveButton');
     saveButton.disabled = true;
@@ -189,6 +305,7 @@ async function handleSaveApplication(event) {
         roleType:    document.getElementById('fieldRoleType').value,
         position:    document.getElementById('fieldPosition').value.trim(),
         location:    document.getElementById('fieldLocation').value.trim(),
+        country:     document.getElementById('fieldCountry').value.trim(),
         status:      document.getElementById('fieldStatus').value,
         deadline:    document.getElementById('fieldDeadline').value,
         appliedDate: document.getElementById('fieldAppliedDate').value,
@@ -231,7 +348,7 @@ async function handleSaveApplication(event) {
     }
 
     saveButton.disabled = false;
-    saveButton.textContent = '💾 Save Application';
+    saveButton.textContent = 'Save Application';
 }
 
 

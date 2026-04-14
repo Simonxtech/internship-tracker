@@ -20,6 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Tracker — Applications</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="/img/logo.png">
 </head>
 <body>
 
@@ -35,9 +36,34 @@
                 <h1 class="page-title">Applications</h1>
                 <p class="page-subtitle">Manage all your internship and working student applications.</p>
             </div>
-            <a href="/application-form.html" class="btn btn-primary">
-                ➕ Add Application
-            </a>
+            <div style="display:flex; gap:8px;">
+                <button class="btn btn-secondary" onclick="openTagsModal()">Manage Tags</button>
+                <a href="/application-form.html" class="btn btn-primary">+ Add Application</a>
+            </div>
+        </div>
+
+        <!-- Manage Tags Modal -->
+        <div id="tagsModalOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
+            <div style="background:var(--card-bg); border-radius:12px; padding:24px; width:440px; max-width:95vw; max-height:80vh; overflow-y:auto; box-shadow:0 8px 32px rgba(0,0,0,0.18);">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+                    <h2 style="font-size:18px; font-weight:600; margin:0;">Manage Tags</h2>
+                    <button onclick="closeTagsModal()" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--text-light); line-height:1;">&times;</button>
+                </div>
+
+                <!-- Bestehende Tags -->
+                <div id="tagsModalList" style="margin-bottom:20px;"></div>
+
+                <!-- Neuen Tag erstellen -->
+                <div style="border-top:1px solid var(--border); padding-top:16px;">
+                    <div style="font-size:13px; font-weight:600; margin-bottom:10px;">Add New Tag</div>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <input type="text" id="newTagName" placeholder="Tag name" style="flex:1; padding:8px 10px; border:1px solid var(--border); border-radius:6px; font-size:13px; background:var(--input-bg); color:var(--text);">
+                        <input type="color" id="newTagColor" value="#3b82f6" style="width:38px; height:34px; border:1px solid var(--border); border-radius:6px; cursor:pointer; padding:2px;">
+                        <button class="btn btn-primary btn-sm" onclick="createTag()" style="white-space:nowrap;">Add Tag</button>
+                    </div>
+                    <div id="tagsModalError" style="font-size:12px; color:#dc2626; margin-top:6px; display:none;"></div>
+                </div>
+            </div>
         </div>
 
         <!-- Filter-Leiste -->
@@ -46,7 +72,7 @@
                 type="text"
                 class="search-input"
                 id="searchInput"
-                placeholder="🔍 Search company, position..."
+                placeholder="Search company, position..."
                 oninput="applyFilters()"
             >
             <select class="filter-select" id="filterStatus" onchange="applyFilters()">
@@ -63,6 +89,42 @@
                 <option value="Internship">Internship</option>
                 <option value="Working Student">Working Student</option>
             </select>
+            <!-- Location-Filter: wird von JavaScript befüllt -->
+            <select class="filter-select" id="filterLocation" onchange="applyFilters()">
+                <option value="">All Locations</option>
+            </select>
+            <!-- Tag/Period-Filter: wird von JavaScript befüllt -->
+            <select class="filter-select" id="filterTag" onchange="applyFilters()">
+                <option value="">All Tags</option>
+            </select>
+            <!-- Salary-Filter: Min und Max -->
+            <input
+                type="number"
+                class="filter-select"
+                id="filterSalaryMin"
+                placeholder="Min €"
+                min="0"
+                max="20000"
+                step="50"
+                style="width:90px"
+                oninput="applyFilters()"
+            >
+            <input
+                type="number"
+                class="filter-select"
+                id="filterSalaryMax"
+                placeholder="Max €"
+                min="0"
+                max="20000"
+                step="50"
+                style="width:90px"
+                oninput="applyFilters()"
+            >
+        </div>
+
+        <!-- Urgent Deadlines Banner -->
+        <div id="urgentBanner" style="display:none; padding:12px 16px; border-radius:8px; margin-bottom:16px; font-size:13px; line-height:1.7;">
+            <div id="urgentBannerContent"></div>
         </div>
 
         <!-- Tabelle -->
@@ -76,9 +138,10 @@
                             <th style="cursor:pointer" onclick="sortByColumn('position')">Position ↕</th>
                             <th>Location</th>
                             <th style="cursor:pointer" onclick="sortByColumn('status')">Status ↕</th>
-                            <th style="cursor:pointer" onclick="sortByColumn('deadline')">Deadline ↕</th>
+                            <th>Tags</th>
+                            <th style="cursor:pointer" onclick="sortByColumn('deadline')">Acceptance Deadline ↕</th>
                             <th style="cursor:pointer" onclick="sortByColumn('appliedDate')">Applied ↕</th>
-                            <th>Salary</th>
+                            <th>Salary (€/mo)</th>
                             <th>Notes</th>
                             <th>Actions</th>
                         </tr>
@@ -91,9 +154,9 @@
 
             <!-- Leerer Zustand -->
             <div class="empty-state" id="emptyState" style="display:none">
-                <p>📋 No applications found.</p>
+                <p>No applications found.</p>
                 <p style="margin-top:8px">
-                    <a href="/application-form.html" class="btn btn-primary btn-sm">➕ Add your first application</a>
+                    <a href="/application-form.html" class="btn btn-primary btn-sm">+ Add your first application</a>
                 </p>
             </div>
         </div>

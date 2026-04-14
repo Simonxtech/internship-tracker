@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Tracker — Home</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="/img/logo.png">
 </head>
 <body>
 
@@ -32,28 +33,41 @@
             <p class="page-subtitle">Here's an overview of your application status.</p>
         </div>
 
-        <!-- Quick-Stats -->
+        <!-- Quick-Stats (klickbar — leiten zur gefilterten Bewerbungsliste weiter) -->
         <div class="stats-grid" id="statsGrid">
-            <div class="stat-card">
+            <a href="/applications.html" class="stat-card" style="text-decoration:none; cursor:pointer; display:block; transition: transform 0.15s, box-shadow 0.15s;"
+               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.12)'"
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=''">
                 <div class="stat-label">Total</div>
                 <div class="stat-value" id="statTotal" style="color: var(--accent)">–</div>
                 <div class="stat-sub">Applications</div>
-            </div>
-            <div class="stat-card">
+            </a>
+            <a href="/applications.html?status=Interview" class="stat-card" style="text-decoration:none; cursor:pointer; display:block; transition: transform 0.15s, box-shadow 0.15s;"
+               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.12)'"
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=''">
                 <div class="stat-label">Interviews</div>
                 <div class="stat-value" id="statInterviews" style="color: var(--orange)">–</div>
                 <div class="stat-sub">Scheduled</div>
-            </div>
-            <div class="stat-card">
+            </a>
+            <a href="/applications.html?status=Offer" class="stat-card" style="text-decoration:none; cursor:pointer; display:block; transition: transform 0.15s, box-shadow 0.15s;"
+               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.12)'"
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=''">
                 <div class="stat-label">Offers</div>
                 <div class="stat-value" id="statOffers" style="color: var(--success)">–</div>
                 <div class="stat-sub">Received</div>
-            </div>
-            <div class="stat-card">
+            </a>
+            <a href="/applications.html?status=Rejected" class="stat-card" style="text-decoration:none; cursor:pointer; display:block; transition: transform 0.15s, box-shadow 0.15s;"
+               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.12)'"
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=''">
                 <div class="stat-label">Rejection Rate</div>
                 <div class="stat-value" id="statRejRate" style="color: var(--danger)">–</div>
                 <div class="stat-sub" id="statRejSub">–</div>
-            </div>
+            </a>
+        </div>
+
+        <!-- Urgent Deadlines Banner -->
+        <div id="urgentBanner" style="display:none; padding:12px 16px; border-radius:8px; margin-bottom:16px; font-size:13px; line-height:1.7;">
+            <div id="urgentBannerContent"></div>
         </div>
 
         <!-- Quick-Links zu den anderen Seiten -->
@@ -62,37 +76,37 @@
         </h2>
         <div class="quick-links">
             <a href="/applications.html" class="quick-link-card">
-                <div class="quick-link-icon">📋</div>
+                <div class="quick-link-icon" style="font-size:20px; font-weight:700; color:var(--accent)">→</div>
                 <div>
                     <div class="quick-link-title">Applications</div>
                     <div class="quick-link-desc">View, search and manage all your applications</div>
                 </div>
             </a>
             <a href="/application-form.html" class="quick-link-card">
-                <div class="quick-link-icon">➕</div>
+                <div class="quick-link-icon" style="font-size:20px; font-weight:700; color:var(--accent)">+</div>
                 <div>
                     <div class="quick-link-title">Add Application</div>
                     <div class="quick-link-desc">Track a new internship or working student position</div>
                 </div>
             </a>
             <a href="/analytics.html" class="quick-link-card">
-                <div class="quick-link-icon">📊</div>
+                <div class="quick-link-icon" style="font-size:20px; font-weight:700; color:var(--accent)">∿</div>
                 <div>
                     <div class="quick-link-title">Analytics</div>
                     <div class="quick-link-desc">Charts and statistics about your progress</div>
                 </div>
             </a>
             <a href="/map.html" class="quick-link-card">
-                <div class="quick-link-icon">🗺️</div>
+                <div class="quick-link-icon" style="font-size:20px; font-weight:700; color:var(--accent)">◎</div>
                 <div>
                     <div class="quick-link-title">Map</div>
                     <div class="quick-link-desc">See where your applications are located</div>
                 </div>
             </a>
             <a href="/page7.html" class="quick-link-card">
-                <div class="quick-link-icon">📌</div>
+                <div class="quick-link-icon" style="font-size:20px; font-weight:700; color:var(--accent)">✦</div>
                 <div>
-                    <div class="quick-link-title">More</div>
+                    <div class="quick-link-title">Assessment</div>
                     <div class="quick-link-desc">Additional features coming soon</div>
                 </div>
             </a>
@@ -141,6 +155,82 @@
         } catch (error) {
             console.log('Fehler beim Laden der Statistiken:', error);
         }
+
+        // Bewerbungen laden um dringende Deadlines zu prüfen
+        try {
+            const appsResponse = await fetch('/api/applications');
+            const appsResult = await appsResponse.json();
+
+            if (appsResult.success) {
+                renderUrgentBannerHome(appsResult.applications);
+            }
+        } catch (error) {
+            console.log('Fehler beim Laden der Bewerbungen für Banner:', error);
+        }
+    }
+
+    /**
+     * Zeigt ein Banner auf der Startseite wenn Deadlines dringend sind.
+     * Dieselbe Logik wie in applications.js — hier inline weil index.html
+     * keine eigene JS-Datei hat.
+     */
+    function renderUrgentBannerHome(applications) {
+        var banner = document.getElementById('urgentBanner');
+        var content = document.getElementById('urgentBannerContent');
+
+        if (!banner || !content) {
+            return;
+        }
+
+        var urgentItems = [];
+        var hasOverdue = false;
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        for (var i = 0; i < applications.length; i++) {
+            var app = applications[i];
+
+            if (!app.deadline) {
+                continue;
+            }
+            if (app.status !== 'Wishlist' && app.status !== 'Applied') {
+                continue;
+            }
+
+            var deadlineDate = new Date(app.deadline);
+            var diffDays = Math.ceil((deadlineDate - today) / 86400000);
+
+            if (diffDays < 0) {
+                urgentItems.push(app.company + ' — ' + app.position + ': Overdue by ' + Math.abs(diffDays) + ' day' + (Math.abs(diffDays) === 1 ? '' : 's'));
+                hasOverdue = true;
+            } else if (diffDays === 0) {
+                urgentItems.push(app.company + ' — ' + app.position + ': Due today');
+                hasOverdue = true;
+            } else if (diffDays <= 3) {
+                urgentItems.push(app.company + ' — ' + app.position + ': Due in ' + diffDays + ' day' + (diffDays === 1 ? '' : 's'));
+            }
+        }
+
+        if (urgentItems.length === 0) {
+            banner.style.display = 'none';
+            return;
+        }
+
+        banner.style.display = 'block';
+
+        if (hasOverdue) {
+            banner.style.background = '#fef2f2';
+            banner.style.border = '1px solid #fecaca';
+        } else {
+            banner.style.background = '#fffbeb';
+            banner.style.border = '1px solid #fde68a';
+        }
+
+        var html = '<strong>Urgent Deadlines</strong><br>';
+        for (var j = 0; j < urgentItems.length; j++) {
+            html = html + urgentItems[j] + '<br>';
+        }
+        content.innerHTML = html;
     }
 
     // Seite initialisieren

@@ -88,7 +88,7 @@ async function createApplication(applicationData, userId) {
         roleType: applicationData.roleType,
         position: applicationData.position,
         location: applicationData.location,
-        country: applicationData.country || 'Germany',
+        country: applicationData.country,
         status: applicationData.status,
         deadline: applicationData.deadline,
         appliedDate: applicationData.appliedDate,

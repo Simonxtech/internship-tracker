@@ -102,6 +102,50 @@ router.get('/:id', async function (req, res) {
 
 
 // =============================================================
+//  Hilfsfunktion: Validierung der Bewerbungsdaten
+//  Wird sowohl für POST als auch PUT verwendet.
+// =============================================================
+function validateApplicationData(data, res) {
+    // Company: Pflicht, 1-100 Zeichen
+    if (!data.company || data.company.trim().length < 1 || data.company.trim().length > 100) {
+        res.status(400).json({ success: false, message: 'Company must be 1-100 characters.' });
+        return false;
+    }
+
+    // Position: Pflicht, 2-200 Zeichen
+    if (!data.position || data.position.trim().length < 2 || data.position.trim().length > 200) {
+        res.status(400).json({ success: false, message: 'Position must be 2-200 characters.' });
+        return false;
+    }
+
+    // Salary: Wenn vorhanden, muss eine gültige Zahl zwischen 0 und 20000 sein
+    if (data.salary !== undefined && data.salary !== '' && data.salary !== 0) {
+        const salaryNum = Number(data.salary);
+        if (isNaN(salaryNum) || salaryNum < 0 || salaryNum > 20000) {
+            res.status(400).json({ success: false, message: 'Salary must be between 0 and 20,000.' });
+            return false;
+        }
+    }
+
+    // URL: Wenn vorhanden, muss mit http:// oder https:// anfangen
+    if (data.url && data.url.trim() !== '') {
+        if (!data.url.startsWith('http://') && !data.url.startsWith('https://')) {
+            res.status(400).json({ success: false, message: 'URL must start with http:// or https://' });
+            return false;
+        }
+    }
+
+    // Notes: Maximal 1000 Zeichen
+    if (data.notes && data.notes.length > 1000) {
+        res.status(400).json({ success: false, message: 'Notes must be under 1000 characters.' });
+        return false;
+    }
+
+    return true;
+}
+
+
+// =============================================================
 //  POST /api/applications — Neue Bewerbung erstellen
 // =============================================================
 router.post('/', async function (req, res) {
@@ -109,12 +153,8 @@ router.post('/', async function (req, res) {
         const userId = req.session.user.id;
         const applicationData = req.body;
 
-        // Pflichtfeld prüfen
-        if (!applicationData.company) {
-            res.status(400).json({
-                success: false,
-                message: 'Company name is required.'
-            });
+        // Serverseitige Validierung
+        if (!validateApplicationData(applicationData, res)) {
             return;
         }
 
@@ -145,6 +185,11 @@ router.put('/:id', async function (req, res) {
         const applicationId = req.params.id;
         const userId = req.session.user.id;
         const updateData = req.body;
+
+        // Serverseitige Validierung
+        if (!validateApplicationData(updateData, res)) {
+            return;
+        }
 
         // Bewerbung aktualisieren
         const updatedApplication = await applicationService.updateApplication(applicationId, updateData, userId);

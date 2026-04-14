@@ -162,19 +162,20 @@ async function writePeriods(periodsArray) {
     await writeJsonFile(PERIODS_FILE, periodsArray);
 }
 
+
 /**
- * Alle Quiz-Ergebnisse lesen
+ * Quiz-Ergebnisse lesen
  */
 async function readQuizResults() {
-    const quizResults = await readJsonFile(QUIZ_RESULTS_FILE);
-    return quizResults;
+    const results = await readJsonFile(QUIZ_RESULTS_FILE);
+    return results;
 }
 
 /**
- * Alle Quiz-Ergebnisse speichern
+ * Quiz-Ergebnisse speichern
  */
-async function writeQuizResults(quizResultsArray) {
-    await writeJsonFile(QUIZ_RESULTS_FILE, quizResultsArray);
+async function writeQuizResults(resultsArray) {
+    await writeJsonFile(QUIZ_RESULTS_FILE, resultsArray);
 }
 
 

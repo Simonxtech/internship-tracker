@@ -1,6 +1,6 @@
 [
   {
-    "id": "mnyrrefpxj4mha",
+    "id": "mnytvdt1g2tdwc",
     "userId": "mnxrwk776p1v3e",
     "company": "Bosch",
     "roleType": "Internship",
@@ -14,11 +14,11 @@
     "url": "https://www.bosch.de/karriere/",
     "notes": "Interview with HR on Thursday. Prepare presentation.",
     "periodIds": [
-      "mnyrrefosjtlgl"
+      "mnytvdt1bhhg76"
     ]
   },
   {
-    "id": "mnyrrefp05sjzj",
+    "id": "mnytvdt2l128bp",
     "userId": "mnxrwk776p1v3e",
     "company": "McKinsey & Company",
     "roleType": "Internship",
@@ -32,11 +32,11 @@
     "url": "",
     "notes": "Online application submitted. Waiting for response.",
     "periodIds": [
-      "mnyrrefo7j22f0"
+      "mnytvdt1drouic"
     ]
   },
   {
-    "id": "mnyrrefp833h2l",
+    "id": "mnytvdt2hlp37p",
     "userId": "mnxrwk776p1v3e",
     "company": "Roland Berger",
     "roleType": "Internship",
@@ -50,12 +50,12 @@
     "url": "",
     "notes": "Case study preparation needed.",
     "periodIds": [
-      "mnyrrefo7j22f0",
-      "mnyrrefosjtlgl"
+      "mnytvdt1drouic",
+      "mnytvdt1bhhg76"
     ]
   },
   {
-    "id": "mnyrrefpz9nefo",
+    "id": "mnytvdt2773yx4",
     "userId": "mnxrwk776p1v3e",
     "company": "Siemens",
     "roleType": "Working Student",
@@ -69,333 +69,330 @@
     "url": "",
     "notes": "Offer received! Review contract details.",
     "periodIds": [
-      "mnyrrefoza0wmv"
+      "mnytvdt13s406v"
     ]
   },
   {
-    "id": "mnyrrefp2eazpw",
+    "id": "mnytvdt2t5in0e",
     "userId": "mnxrwk776p1v3e",
-    "company": "Deutsche Bank",
-    "roleType": "Internship",
-    "position": "Investment Banking Analyst",
-    "location": "Frankfurt",
-    "country": "Germany",
-    "status": "Wishlist",
-    "deadline": "2026-05-09",
-    "appliedDate": "",
-    "salary": 3000,
-    "url": "https://careers.db.com",
-    "notes": "Interested but not applied yet. Good salary.",
-    "periodIds": [
-      "mnyrrefo7j22f0"
-    ]
-  },
-  {
-    "id": "mnyrrefp4sd942",
-    "userId": "mnxrwk776p1v3e",
-    "company": "SoundCloud",
-    "roleType": "Internship",
-    "position": "Product Management Intern",
-    "location": "Berlin",
+    "company": "BMW Group",
+    "roleType": "Working Student",
+    "position": "Working Student Software Development",
+    "location": "Munich",
     "country": "Germany",
     "status": "Rejected",
-    "deadline": "2026-04-04",
-    "appliedDate": "2026-03-10",
-    "salary": 1600,
+    "deadline": "2026-03-30",
+    "appliedDate": "2026-03-05",
+    "salary": 1200,
     "url": "",
-    "notes": "Application rejected. Timing was not good.",
+    "notes": "Rejected after first interview round.",
     "periodIds": [
-      "mnyrrefo7j22f0"
+      "mnytvdt13s406v"
     ]
   },
   {
-    "id": "mnyrrefpixspce",
+    "id": "mnytvdt2adv68d",
     "userId": "mnxrwk776p1v3e",
-    "company": "ThyssenKrupp",
+    "company": "Allianz",
     "roleType": "Working Student",
-    "position": "Working Student Engineering",
-    "location": "Düsseldorf",
+    "position": "Working Student Product Management",
+    "location": "Munich",
+    "country": "Germany",
+    "status": "Wishlist",
+    "deadline": "2026-04-28",
+    "appliedDate": "",
+    "salary": 1100,
+    "url": "",
+    "notes": "Still working on cover letter.",
+    "periodIds": []
+  },
+  {
+    "id": "mnytvdt2ftnwhi",
+    "userId": "mnxrwk776p1v3e",
+    "company": "SAP",
+    "roleType": "Internship",
+    "position": "UX Design Intern",
+    "location": "Walldorf",
     "country": "Germany",
     "status": "Applied",
-    "deadline": "2026-04-28",
-    "appliedDate": "2026-04-06",
-    "salary": 1350,
-    "url": "",
-    "notes": "Waiting for interview invitation.",
+    "deadline": "2026-04-24",
+    "appliedDate": "2026-04-07",
+    "salary": 1500,
+    "url": "https://www.sap.com/careers",
+    "notes": "Applied via career portal. Portfolio attached.",
     "periodIds": [
-      "mnyrrefoza0wmv"
+      "mnytvdt1drouic"
     ]
   },
   {
-    "id": "mnyrrefpf21ka6",
+    "id": "mnytvdt2dim3yt",
     "userId": "mnxrwk776p1v3e",
-    "company": "DocuSign",
+    "company": "Porsche",
     "roleType": "Internship",
     "position": "Marketing Intern",
-    "location": "Cologne",
+    "location": "Stuttgart",
     "country": "Germany",
     "status": "Wishlist",
     "deadline": "2026-05-04",
     "appliedDate": "",
-    "salary": 1500,
-    "url": "https://www.docusign.de/careers",
-    "notes": "Tech company, great culture.",
+    "salary": 1300,
+    "url": "",
+    "notes": "Application opens next week.",
     "periodIds": [
-      "mnyrrefo7j22f0"
+      "mnytvdt1drouic"
     ]
   },
   {
-    "id": "mnyrrefpz8xl1x",
+    "id": "mnytvdt23y12th",
     "userId": "mnxrwk776p1v3e",
-    "company": "SAP",
+    "company": "Deutsche Bank",
     "roleType": "Internship",
-    "position": "Business Technology Intern",
-    "location": "Walldorf",
+    "position": "Finance Intern",
+    "location": "Frankfurt",
     "country": "Germany",
-    "status": "Online Assessment",
-    "deadline": "2026-04-19",
-    "appliedDate": "2026-03-30",
-    "salary": 2200,
+    "status": "Interview",
+    "deadline": "2026-04-13",
+    "appliedDate": "2026-03-20",
+    "salary": 2000,
     "url": "",
-    "notes": "Large global company. Tough interview process.",
+    "notes": "Second round interview next Monday. Prepare case.",
     "periodIds": [
-      "mnyrrefosjtlgl"
+      "mnytvdt1bhhg76"
     ]
   },
   {
-    "id": "mnyrrefpaykkj0",
+    "id": "mnytvdt2vnmyd2",
     "userId": "mnxrwk776p1v3e",
-    "company": "Heidelberg University",
+    "company": "Daimler Truck",
     "roleType": "Working Student",
-    "position": "Research Assistant",
-    "location": "Heidelberg",
+    "position": "Working Student Supply Chain",
+    "location": "Stuttgart",
     "country": "Germany",
-    "status": "Offer",
-    "deadline": "2026-04-09",
-    "appliedDate": "2026-03-25",
-    "salary": 450,
+    "status": "Applied",
+    "deadline": "2026-04-19",
+    "appliedDate": "2026-04-11",
+    "salary": 1250,
     "url": "",
-    "notes": "Research position in Computer Science.",
+    "notes": "Applied through LinkedIn.",
     "periodIds": [
-      "mnyrrefogrfzv8"
+      "mnytvdt13s406v"
     ]
   },
   {
-    "id": "mnyrrefp99tfjk",
+    "id": "mnytvdt2hch1wy",
     "userId": "mnxrwk776p1v3e",
     "company": "Goldman Sachs",
     "roleType": "Internship",
-    "position": "Summer Analyst",
+    "position": "Summer Analyst — Investment Banking",
     "location": "London",
     "country": "United Kingdom",
-    "status": "Interview",
-    "deadline": "2026-04-29",
-    "appliedDate": "2026-03-05",
+    "status": "Applied",
+    "deadline": "2026-04-26",
+    "appliedDate": "2026-04-06",
     "salary": 3500,
     "url": "https://www.goldmansachs.com/careers/",
-    "notes": "First phone interview scheduled. Prepare case studies.",
+    "notes": "Summer analyst program. Very competitive.",
     "periodIds": [
-      "mnyrrefo7j22f0",
-      "mnyrrefogrd4t6"
+      "mnytvdt1drouic",
+      "mnytvdt1djztru"
     ]
   },
   {
-    "id": "mnyrrefp8n112t",
+    "id": "mnytvdt2tvo475",
     "userId": "mnxrwk776p1v3e",
-    "company": "Deloitte UK",
+    "company": "Deloitte",
     "roleType": "Internship",
     "position": "Consulting Intern",
     "location": "London",
     "country": "United Kingdom",
-    "status": "Applied",
-    "deadline": "2026-05-14",
-    "appliedDate": "2026-04-02",
-    "salary": 2800,
+    "status": "Online Assessment",
+    "deadline": "2026-04-20",
+    "appliedDate": "2026-03-31",
+    "salary": 2200,
     "url": "",
-    "notes": "Applied last week. Still waiting for response.",
+    "notes": "Numerical reasoning + verbal test pending.",
     "periodIds": [
-      "mnyrrefo7j22f0"
+      "mnytvdt1drouic"
     ]
   },
   {
-    "id": "mnyrrefpg8e1ty",
+    "id": "mnytvdt2e08t88",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Amazon",
+    "roleType": "Internship",
+    "position": "Software Development Engineer Intern",
+    "location": "London",
+    "country": "United Kingdom",
+    "status": "Wishlist",
+    "deadline": "2026-05-14",
+    "appliedDate": "",
+    "salary": 4000,
+    "url": "https://www.amazon.jobs",
+    "notes": "Need to prepare for LeetCode interviews.",
+    "periodIds": [
+      "mnytvdt1djztru"
+    ]
+  },
+  {
+    "id": "mnytvdt2y0fog3",
     "userId": "mnxrwk776p1v3e",
     "company": "UBS",
     "roleType": "Internship",
-    "position": "Wealth Management Intern",
+    "position": "Finance Intern — Wealth Management",
     "location": "Zurich",
     "country": "Switzerland",
+    "status": "Applied",
+    "deadline": "2026-04-23",
+    "appliedDate": "2026-04-08",
+    "salary": 3200,
+    "url": "",
+    "notes": "Applied for the spring intern cohort.",
+    "periodIds": [
+      "mnytvdt178xh3p"
+    ]
+  },
+  {
+    "id": "mnytvdt21brx5m",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Nestlé",
+    "roleType": "Internship",
+    "position": "Marketing Intern",
+    "location": "Vevey",
+    "country": "Switzerland",
+    "status": "Rejected",
+    "deadline": "2026-03-25",
+    "appliedDate": "2026-02-28",
+    "salary": 2700,
+    "url": "",
+    "notes": "No feedback given.",
+    "periodIds": [
+      "mnytvdt178xh3p"
+    ]
+  },
+  {
+    "id": "mnytvdt22ceik0",
+    "userId": "mnxrwk776p1v3e",
+    "company": "ASML",
+    "roleType": "Internship",
+    "position": "Systems Engineering Intern",
+    "location": "Eindhoven",
+    "country": "Netherlands",
+    "status": "Interview",
+    "deadline": "2026-04-18",
+    "appliedDate": "2026-03-25",
+    "salary": 1800,
+    "url": "https://www.asml.com/en/careers",
+    "notes": "Technical interview scheduled. Review control systems.",
+    "periodIds": [
+      "mnytvdt1bhhg76",
+      "mnytvdt1djztru"
+    ]
+  },
+  {
+    "id": "mnytvdt2ktm78v",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Booking.com",
+    "roleType": "Working Student",
+    "position": "Data Analyst Working Student",
+    "location": "Amsterdam",
+    "country": "Netherlands",
+    "status": "Applied",
+    "deadline": "2026-04-30",
+    "appliedDate": "2026-04-10",
+    "salary": 2100,
+    "url": "https://careers.booking.com",
+    "notes": "Remote-friendly position.",
+    "periodIds": [
+      "mnytvdt13s406v"
+    ]
+  },
+  {
+    "id": "mnytvdt2s4871y",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Google",
+    "roleType": "Internship",
+    "position": "Software Engineering Intern",
+    "location": "New York",
+    "country": "United States",
     "status": "Wishlist",
     "deadline": "2026-05-29",
     "appliedDate": "",
-    "salary": 3200,
-    "url": "https://www.ubs.com/careers/",
-    "notes": "High salary but competitive. Need to improve skills first.",
+    "salary": 7000,
+    "url": "https://careers.google.com",
+    "notes": "Dream company. Need strong algorithms preparation.",
     "periodIds": [
-      "mnyrrefogrd4t6"
+      "mnytvdt1djztru"
     ]
   },
   {
-    "id": "mnyrrefpjvzgq8",
+    "id": "mnytvdt2toc5bi",
     "userId": "mnxrwk776p1v3e",
-    "company": "Switzerland Tourism Board",
+    "company": "Red Bull",
+    "roleType": "Internship",
+    "position": "Brand Management Intern",
+    "location": "Salzburg",
+    "country": "Austria",
+    "status": "Applied",
+    "deadline": "2026-04-22",
+    "appliedDate": "2026-04-05",
+    "salary": 1600,
+    "url": "",
+    "notes": "Exciting brand. Good culture fit.",
+    "periodIds": [
+      "mnytvdt1drouic"
+    ]
+  },
+  {
+    "id": "mnytvdt28oppj9",
+    "userId": "mnxrwk776p1v3e",
+    "company": "L'Oréal",
     "roleType": "Internship",
     "position": "Digital Marketing Intern",
-    "location": "Zurich",
-    "country": "Switzerland",
-    "status": "Rejected",
-    "deadline": "2026-03-30",
-    "appliedDate": "2026-02-28",
-    "salary": 2000,
-    "url": "",
-    "notes": "Did not advance to interview stage.",
-    "periodIds": [
-      "mnyrrefo7j22f0"
-    ]
-  },
-  {
-    "id": "mnyrrefpi1letv",
-    "userId": "mnxrwk776p1v3e",
-    "company": "Adyen",
-    "roleType": "Internship",
-    "position": "Engineering Intern",
-    "location": "Amsterdam",
-    "country": "Netherlands",
-    "status": "Online Assessment",
-    "deadline": "2026-04-24",
-    "appliedDate": "2026-03-27",
-    "salary": 2400,
-    "url": "https://www.adyen.com/careers/",
-    "notes": "Fintech company. Technical assessment coming up.",
-    "periodIds": [
-      "mnyrrefosjtlgl"
-    ]
-  },
-  {
-    "id": "mnyrrefpey1qcz",
-    "userId": "mnxrwk776p1v3e",
-    "company": "ING Netherlands",
-    "roleType": "Internship",
-    "position": "Finance Intern",
-    "location": "Amsterdam",
-    "country": "Netherlands",
-    "status": "Applied",
-    "deadline": "2026-05-04",
-    "appliedDate": "2026-04-07",
-    "salary": 2100,
-    "url": "",
-    "notes": "Large banking group with good training programs.",
-    "periodIds": [
-      "mnyrrefo7j22f0"
-    ]
-  },
-  {
-    "id": "mnyrrefpuxn8vx",
-    "userId": "mnxrwk776p1v3e",
-    "company": "Otto Group",
-    "roleType": "Working Student",
-    "position": "Supply Chain Associate",
-    "location": "Hamburg",
-    "country": "Germany",
-    "status": "Interview",
-    "deadline": "2026-04-22",
-    "appliedDate": "2026-03-23",
-    "salary": 1300,
-    "url": "",
-    "notes": "Interview with department manager scheduled for next week.",
-    "periodIds": [
-      "mnyrrefoza0wmv"
-    ]
-  },
-  {
-    "id": "mnyrrefpqbopv9",
-    "userId": "mnxrwk776p1v3e",
-    "company": "BASF",
-    "roleType": "Internship",
-    "position": "Chemistry Intern",
-    "location": "Ludwigshafen",
-    "country": "Germany",
+    "location": "Paris",
+    "country": "France",
     "status": "Wishlist",
-    "deadline": "2026-06-13",
-    "appliedDate": "",
-    "salary": 1500,
-    "url": "https://www.basf.com/careers/",
-    "notes": "Working in chemical industry. Need to verify qualification.",
-    "periodIds": [
-      "mnyrrefogrfzv8"
-    ]
-  },
-  {
-    "id": "mnyrrefp348wkg",
-    "userId": "mnxrwk776p1v3e",
-    "company": "Lufthansa",
-    "roleType": "Internship",
-    "position": "Corporate Strategy Intern",
-    "location": "Frankfurt",
-    "country": "Germany",
-    "status": "Online Assessment",
-    "deadline": "2026-04-26",
-    "appliedDate": "2026-03-25",
-    "salary": 1800,
-    "url": "",
-    "notes": "Large aviation company. Assessment includes case studies.",
-    "periodIds": [
-      "mnyrrefo7j22f0"
-    ]
-  },
-  {
-    "id": "mnyrrefpd4l0kr",
-    "userId": "mnxrwk776p1v3e",
-    "company": "Zalando",
-    "roleType": "Internship",
-    "position": "Data Analytics Intern",
-    "location": "Berlin",
-    "country": "Germany",
-    "status": "Rejected",
-    "deadline": "2026-04-06",
-    "appliedDate": "2026-02-23",
-    "salary": 2000,
-    "url": "",
-    "notes": "Did not qualify for this round. Can try again next year.",
-    "periodIds": [
-      "mnyrrefo7j22f0"
-    ]
-  },
-  {
-    "id": "mnyrrefpqgs0p2",
-    "userId": "mnxrwk776p1v3e",
-    "company": "Infineon",
-    "roleType": "Internship",
-    "position": "Hardware Engineering Intern",
-    "location": "Munich",
-    "country": "Germany",
-    "status": "Applied",
-    "deadline": "2026-05-19",
-    "appliedDate": "2026-04-11",
-    "salary": 2600,
-    "url": "https://www.infineon.com/careers/",
-    "notes": "Semiconductor company. Just applied.",
-    "periodIds": [
-      "mnyrrefosjtlgl"
-    ]
-  },
-  {
-    "id": "mnyrrefpqencns",
-    "userId": "mnxrwk776p1v3e",
-    "company": "Daimler",
-    "roleType": "Working Student",
-    "position": "Automotive Engineering",
-    "location": "Stuttgart",
-    "country": "Germany",
-    "status": "Wishlist",
-    "deadline": "2026-07-13",
+    "deadline": "2026-05-09",
     "appliedDate": "",
     "salary": 1700,
-    "url": "https://careers.daimler.com",
-    "notes": "Luxury automotive manufacturer. Worth applying.",
+    "url": "",
+    "notes": "French language skills required — need to check.",
     "periodIds": [
-      "mnyrrefoza0wmv",
-      "mnyrrefogrd4t6"
+      "mnytvdt178xh3p"
+    ]
+  },
+  {
+    "id": "mnytvdt2wi30co",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Banco Santander",
+    "roleType": "Internship",
+    "position": "FinTech Intern",
+    "location": "Madrid",
+    "country": "Spain",
+    "status": "Rejected",
+    "deadline": "2026-04-02",
+    "appliedDate": "2026-03-10",
+    "salary": 1100,
+    "url": "",
+    "notes": "Rejected at CV screening stage.",
+    "periodIds": []
+  },
+  {
+    "id": "mnytvdt22fsbog",
+    "userId": "mnxrwk776p1v3e",
+    "company": "Accenture",
+    "roleType": "Working Student",
+    "position": "Technology Consulting Working Student",
+    "location": "Dublin",
+    "country": "Ireland",
+    "status": "Online Assessment",
+    "deadline": "2026-04-25",
+    "appliedDate": "2026-04-02",
+    "salary": 1900,
+    "url": "",
+    "notes": "Cognitive ability test scheduled for next week.",
+    "periodIds": [
+      "mnytvdt13s406v",
+      "mnytvdt178xh3p"
     ]
   }
 ]

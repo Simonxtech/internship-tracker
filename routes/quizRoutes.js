@@ -4,112 +4,80 @@
  * =============================================================
  *
  *  Endpunkte:
- *    GET  /api/quiz/questions   → Liefert alle 20 Fragen
- *    GET  /api/quiz/careers     → Liefert alle 50 Karrieren
- *    POST /api/quiz/results     → Speichert Quiz-Ergebnis
- *    GET  /api/quiz/results     → Lädt letztes Quiz-Ergebnis
+ *    GET  /api/quiz/results → Gespeichertes Ergebnis des Users laden
+ *    POST /api/quiz/results → Ergebnis nach Abschluss des Quiz speichern
  *
- *  Alle Routen erfordern Login (authMiddleware).
+ *  Wird in server.js eingebunden mit:
+ *    app.use('/api/quiz', quizRoutes)
  * =============================================================
  */
 
 const express = require('express');
 const router = express.Router();
+
 const quizService = require('../services/quizService');
 const { requireLogin } = require('../middleware/authMiddleware');
 
-/**
- * GET /api/quiz/questions
- * Gibt alle 20 Quiz-Fragen zurück.
- * Öffentlich (keine Login-Prüfung nötig, um die Seite zu laden)
- */
-router.get('/questions', function(req, res) {
-    const questions = quizService.getQuestions();
-    return res.json({
-        success: true,
-        questions: questions
-    });
-});
 
-/**
- * GET /api/quiz/careers
- * Gibt alle 50 Karriere-Beschreibungen zurück.
- * Sowie die Profile-Typen.
- */
-router.get('/careers', function(req, res) {
-    const careers = quizService.getCareers();
-    const profiles = quizService.getProfiles();
-    
-    return res.json({
-        success: true,
-        careers: careers,
-        profiles: profiles
-    });
-});
+// Alle Routen brauchen Login
+router.use(requireLogin);
 
-/**
- * POST /api/quiz/results
- * Speichert das Quiz-Ergebnis des eingeloggten Users.
- * 
- * Body:
- * {
- *   "scores": { "Career1": 10, "Career2": 8, ... },
- *   "topCareers": ["Career1", "Career2", "Career3"],
- *   "profile": { emoji: "🧠", type: "The Strategist", ... }
- * }
- */
-router.post('/results', requireLogin, async function(req, res) {
-    const userId = req.session.userId;
-    const resultData = req.body;
-    
-    if (!userId) {
-        return res.status(401).json({ success: false, message: 'Not logged in' });
-    }
-    
-    if (!resultData || !resultData.scores) {
-        return res.status(400).json({ success: false, message: 'Missing scores data' });
-    }
-    
+
+// =============================================================
+//  GET /api/quiz/results — Gespeichertes Ergebnis laden
+// =============================================================
+router.get('/results', async function (req, res) {
     try {
-        const savedResult = await quizService.saveResult(userId, resultData);
-        
-        if (savedResult) {
-            return res.json({
-                success: true,
-                message: 'Quiz result saved',
-                result: savedResult
-            });
-        } else {
-            return res.status(500).json({ success: false, message: 'Error saving result' });
-        }
-    } catch (error) {
-        console.log('Fehler beim Speichern des Quiz-Ergebnisses:', error);
-        return res.status(500).json({ success: false, message: 'Server error' });
-    }
-});
-
-/**
- * GET /api/quiz/results
- * Lädt das letzte Quiz-Ergebnis des eingeloggten Users.
- */
-router.get('/results', requireLogin, async function(req, res) {
-    const userId = req.session.userId;
-    
-    if (!userId) {
-        return res.status(401).json({ success: false, message: 'Not logged in' });
-    }
-    
-    try {
+        const userId = req.session.user.id;
         const result = await quizService.getResult(userId);
-        
-        return res.json({
+
+        res.status(200).json({
             success: true,
-            result: result
+            quizResult: result  // null wenn noch kein Ergebnis gespeichert
         });
+
     } catch (error) {
-        console.log('Fehler beim Laden des Quiz-Ergebnisses:', error);
-        return res.status(500).json({ success: false, message: 'Server error' });
+        res.status(500).json({
+            success: false,
+            message: 'Error loading quiz result: ' + error.message
+        });
     }
 });
 
+
+// =============================================================
+//  POST /api/quiz/results — Ergebnis speichern
+// =============================================================
+router.post('/results', async function (req, res) {
+    try {
+        const userId = req.session.user.id;
+        const resultData = req.body;
+
+        // Antworten müssen vorhanden sein
+        if (!resultData.answers || !Array.isArray(resultData.answers)) {
+            res.status(400).json({
+                success: false,
+                message: 'Answers are required.'
+            });
+            return;
+        }
+
+        const savedResult = await quizService.saveResult(userId, resultData);
+
+        res.status(200).json({
+            success: true,
+            message: 'Quiz result saved!',
+            quizResult: savedResult
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error saving quiz result: ' + error.message
+        });
+    }
+});
+
+
+// --- Router exportieren ---
 module.exports = router;
