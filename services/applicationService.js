@@ -88,6 +88,7 @@ async function createApplication(applicationData, userId) {
         roleType: applicationData.roleType,
         position: applicationData.position,
         location: applicationData.location,
+        country: applicationData.country || 'Germany',
         status: applicationData.status,
         deadline: applicationData.deadline,
         appliedDate: applicationData.appliedDate,
@@ -154,6 +155,9 @@ async function updateApplication(applicationId, updateData, userId) {
     }
     if (updateData.location !== undefined) {
         existingApplication.location = updateData.location;
+    }
+    if (updateData.country !== undefined) {
+        existingApplication.country = updateData.country;
     }
     if (updateData.status !== undefined) {
         existingApplication.status = updateData.status;

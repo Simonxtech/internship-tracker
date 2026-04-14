@@ -14,6 +14,7 @@
  *    - roleType: "Internship" oder "Working Student"
  *    - position: Jobtitel
  *    - location: Ort
+ *    - country: Land (z.B. "Germany", "UK", "Switzerland")
  *    - status: Aktueller Stand der Bewerbung
  *    - deadline: Bewerbungsfrist
  *    - appliedDate: Wann man sich beworben hat
@@ -50,6 +51,7 @@ class Application {
         this.roleType = data.roleType || 'Internship';
         this.position = data.position || '';
         this.location = data.location || '';
+        this.country = data.country || 'Germany';
         this._status = data.status || 'Wishlist';  // mit Unterstrich für den Setter
         this.deadline = data.deadline || '';
         this.appliedDate = data.appliedDate || '';
@@ -120,6 +122,7 @@ class Application {
             roleType: this.roleType,
             position: this.position,
             location: this.location,
+            country: this.country,
             status: this._status,
             deadline: this.deadline,
             appliedDate: this.appliedDate,

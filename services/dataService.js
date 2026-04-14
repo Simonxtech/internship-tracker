@@ -28,6 +28,7 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 const USERS_FILE = path.join(DATA_DIR, 'users.json');
 const APPLICATIONS_FILE = path.join(DATA_DIR, 'applications.json');
 const PERIODS_FILE = path.join(DATA_DIR, 'periods.json');
+const QUIZ_RESULTS_FILE = path.join(DATA_DIR, 'quizResults.json');
 
 
 /**
@@ -46,7 +47,7 @@ async function initializeDataFiles() {
     }
 
     // Für jede Datei prüfen ob sie existiert
-    const filesToCheck = [USERS_FILE, APPLICATIONS_FILE, PERIODS_FILE];
+    const filesToCheck = [USERS_FILE, APPLICATIONS_FILE, PERIODS_FILE, QUIZ_RESULTS_FILE];
 
     for (let i = 0; i < filesToCheck.length; i++) {
         const filePath = filesToCheck[i];
@@ -161,6 +162,21 @@ async function writePeriods(periodsArray) {
     await writeJsonFile(PERIODS_FILE, periodsArray);
 }
 
+/**
+ * Alle Quiz-Ergebnisse lesen
+ */
+async function readQuizResults() {
+    const quizResults = await readJsonFile(QUIZ_RESULTS_FILE);
+    return quizResults;
+}
+
+/**
+ * Alle Quiz-Ergebnisse speichern
+ */
+async function writeQuizResults(quizResultsArray) {
+    await writeJsonFile(QUIZ_RESULTS_FILE, quizResultsArray);
+}
+
 
 // --- Alle Funktionen exportieren ---
 module.exports = {
@@ -172,5 +188,7 @@ module.exports = {
     readApplications,
     writeApplications,
     readPeriods,
-    writePeriods
+    writePeriods,
+    readQuizResults,
+    writeQuizResults
 };

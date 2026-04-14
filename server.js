@@ -21,12 +21,14 @@ const session = require('express-session');
 const path = require('path');
 const dataService = require('./services/dataService');
 const logger = require('./utils/logger');
+const FileSessionStore = require('./utils/fileSessionStore');
 
 // --- Routen-Dateien laden ---
 const authRoutes = require('./routes/authRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
 const periodRoutes = require('./routes/periodRoutes');
 const statsRoutes = require('./routes/statsRoutes');
+const quizRoutes = require('./routes/quizRoutes');
 
 // --- Express-App erstellen ---
 const app = express();
@@ -49,8 +51,15 @@ app.use(express.json());
  * Session-Middleware: Hält den Login-Status des Users fest.
  * Jeder Browser bekommt eine eindeutige Session-ID als Cookie.
  * So weiß der Server bei jeder Anfrage, wer eingeloggt ist.
+ * 
+ * WICHTIG: Wir speichern Sessions in einer JSON-Datei (FileSessionStore)
+ * statt im RAM. Das bedeutet Sessions bleiben auch nach Server-Neustart erhalten.
+ * Das ist besonders wichtig auf Hosting-Plattformen wie Render.com für Free-Tier.
  */
+const sessionStore = new FileSessionStore();
+
 app.use(session({
+    store: sessionStore,
     secret: 'internship-tracker-geheim-2026',
     resave: false,
     saveUninitialized: false,
@@ -76,11 +85,13 @@ app.use(express.static(path.join(__dirname, 'public')));
  *   /api/applications/... → CRUD für Bewerbungen
  *   /api/periods/...      → CRUD für Zeiträume
  *   /api/stats            → Statistiken
+ *   /api/quiz             → Quiz-Fragen und Ergebnisse
  */
 app.use('/api/auth', authRoutes);
 app.use('/api/applications', applicationRoutes);
 app.use('/api/periods', periodRoutes);
 app.use('/api/stats', statsRoutes);
+app.use('/api/quiz', quizRoutes);
 
 
 // =============================================================

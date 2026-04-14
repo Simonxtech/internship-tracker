@@ -1,20 +1,32 @@
 [
   {
-    "id": "mnxrwk7h4cmbxc",
+    "id": "mnyrrefo7j22f0",
     "userId": "mnxrwk776p1v3e",
     "name": "Summer Internship 2026",
     "color": "#f59e0b"
   },
   {
-    "id": "mnxrwk7hor3v23",
+    "id": "mnyrrefosjtlgl",
     "userId": "mnxrwk776p1v3e",
     "name": "Mandatory Internship",
     "color": "#8b5cf6"
   },
   {
-    "id": "mnxrwk7h6qp197",
+    "id": "mnyrrefoza0wmv",
     "userId": "mnxrwk776p1v3e",
     "name": "Working Student WS 25/26",
     "color": "#3b82f6"
+  },
+  {
+    "id": "mnyrrefogrd4t6",
+    "userId": "mnxrwk776p1v3e",
+    "name": "Gap Year",
+    "color": "#10b981"
+  },
+  {
+    "id": "mnyrrefogrfzv8",
+    "userId": "mnxrwk776p1v3e",
+    "name": "Voluntary Internship",
+    "color": "#ef4444"
   }
 ]

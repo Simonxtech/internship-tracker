@@ -1,45 +1,103 @@
 <!--
   =============================================================
-   page7.html — Platzhalter-Seite
+   page7.html — Career Assessment Quiz
   =============================================================
 
-   Diese Seite hat nur die Grundstruktur mit Navigation.
-   Der Inhalt wird später definiert.
-  =============================================================
+   Interaktives Quiz für berufliches Profiling
+   =============================================================
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internship Tracker — More</title>
+    <title>Career Assessment Quiz</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/quiz.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation (wird von navigation.js befüllt) -->
     <nav class="navbar" id="navbar"></nav>
 
     <!-- Seiteninhalt -->
     <div class="page-container">
 
-        <div class="page-header">
-            <h1 class="page-title">More Features</h1>
-            <p class="page-subtitle">This page is a placeholder for future features.</p>
+        <!-- INTRO -->
+        <div id="intro" class="quiz-intro">
+            <h1 class="page-title">Career Assessment Quiz</h1>
+            <p class="page-subtitle">Answer 20 questions about your working style and interests. Get a personalized ranking across 50 business career fields.</p>
+            <button class="btn btn-primary" onclick="startQuiz()">Start Assessment</button>
         </div>
 
-        <div class="card" style="text-align:center; padding:60px 20px;">
-            <div style="font-size:48px; margin-bottom:16px;">🚧</div>
-            <h2 style="font-size:18px; font-weight:600; margin-bottom:8px;">Coming Soon</h2>
-            <p style="color:var(--text-muted); font-size:14px; max-width:400px; margin:0 auto;">
-                This page will be filled with additional features in the future.
-                For now, check out the other sections of the app!
-            </p>
-            <div style="margin-top:24px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-                <a href="/applications.html" class="btn btn-primary">📋 View Applications</a>
-                <a href="/application-form.html" class="btn btn-secondary">➕ Add New</a>
-                <a href="/analytics.html" class="btn btn-secondary">📊 Analytics</a>
+        <!-- QUIZ -->
+        <div id="quiz" class="quiz-container hidden">
+            <div class="quiz-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progBar" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="progPct">0%</span>
+                </div>
             </div>
+
+            <p class="quiz-counter">Question <span id="qNum">1</span> of 20</p>
+
+            <div class="quiz-box" id="qBox">
+                <h2 id="qText"></h2>
+                <div id="qOpts" class="quiz-options"></div>
+            </div>
+
+            <div class="quiz-controls">
+                <button class="btn btn-secondary" id="backBtn" onclick="goBack()" disabled>Back</button>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div id="results" class="quiz-results hidden">
+
+            <!-- Profil Card -->
+            <div class="profile-card fade-in">
+                <div class="profile-emoji" id="profEmoji"></div>
+                <h2 class="profile-type" id="profType"></h2>
+                <p class="profile-desc" id="profDesc"></p>
+            </div>
+
+            <h2 style="text-align: center; margin-top: 30px;" class="fade-in">Top Career Matches</h2>
+
+            <!-- Top 3 Cards -->
+            <div id="topCards" class="top-cards-grid fade-in"></div>
+
+            <!-- Charts -->
+            <div class="chart-box fade-in">
+                <h3>Top 10 Career Scores</h3>
+                <canvas id="chartBar"></canvas>
+            </div>
+
+            <div class="chart-box fade-in">
+                <h3>Your Profile Radar</h3>
+                <canvas id="chartRadar"></canvas>
+            </div>
+
+            <!-- Score Table -->
+            <h3 style="margin-top: 30px;" class="fade-in">Full Score Breakdown</h3>
+            <table class="scores-table fade-in">
+                <thead>
+                    <tr>
+                        <th>Career Path</th>
+                        <th style="width: 80px; text-align: center;">Score</th>
+                    </tr>
+                </thead>
+                <tbody id="scoreTable"></tbody>
+            </table>
+
+            <!-- Actions -->
+            <div class="results-actions fade-in">
+                <button class="btn btn-primary" onclick="jumpToApplications()">Browse Jobs</button>
+                <button class="btn btn-secondary" onclick="location.reload()">Take Again</button>
+            </div>
+
         </div>
 
     </div>
@@ -47,7 +105,12 @@
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
-    <!-- JavaScript -->
+    <!-- Scripts -->
+    <script src="/js/navigation.js"></script>
+    <script src="/js/quiz.js"></script>
+
+</body>
+</html>
     <script src="/js/navigation.js"></script>
     <script>
     /**
