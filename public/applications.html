@@ -18,7 +18,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internship Tracker — Applications</title>
+    <title>Intern Buddy — Applications</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="/img/logo.png">
 </head>
@@ -43,8 +43,9 @@
         </div>
 
         <!-- Manage Tags Modal -->
-        <div id="tagsModalOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
-            <div style="background:var(--card-bg); border-radius:12px; padding:24px; width:440px; max-width:95vw; max-height:80vh; overflow-y:auto; box-shadow:0 8px 32px rgba(0,0,0,0.18);">
+        <div id="tagsModalOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(4px); z-index:1000; align-items:center; justify-content:center;">
+            <!-- Fester weißer Hintergrund damit man den Content dahinter nicht sieht -->
+            <div style="background:var(--surface); border-radius:12px; padding:24px; width:440px; max-width:95vw; max-height:80vh; overflow-y:auto; box-shadow:0 8px 32px rgba(0,0,0,0.18);">
                 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
                     <h2 style="font-size:18px; font-weight:600; margin:0;">Manage Tags</h2>
                     <button onclick="closeTagsModal()" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--text-light); line-height:1;">&times;</button>
@@ -130,19 +131,17 @@
         <!-- Tabelle -->
         <div class="table-wrap">
             <div class="table-scroll">
-                <table>
+                <table id="applicationsTable">
                     <thead>
                         <tr>
-                            <th style="cursor:pointer" onclick="sortByColumn('company')">Company ↕</th>
+                            <th class="col-company" style="cursor:pointer" onclick="sortByColumn('company')">Company ↕</th>
                             <th style="cursor:pointer" onclick="sortByColumn('roleType')">Type ↕</th>
-                            <th style="cursor:pointer" onclick="sortByColumn('position')">Position ↕</th>
-                            <th>Location</th>
+                            <th class="col-position" style="cursor:pointer" onclick="sortByColumn('position')">Position ↕</th>
+                            <th class="col-location">Location</th>
                             <th style="cursor:pointer" onclick="sortByColumn('status')">Status ↕</th>
-                            <th>Tags</th>
-                            <th style="cursor:pointer" onclick="sortByColumn('deadline')">Acceptance Deadline ↕</th>
-                            <th style="cursor:pointer" onclick="sortByColumn('appliedDate')">Applied ↕</th>
-                            <th>Salary (€/mo)</th>
-                            <th>Notes</th>
+                            <th class="col-tags">Tags</th>
+                            <th class="col-deadline" style="cursor:pointer" onclick="sortByColumn('deadline')">Deadline ↕</th>
+                            <th class="col-salary">Salary (€/mo)</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

@@ -104,7 +104,7 @@ async function initializeAndStart() {
         // Server auf Port 8080 starten
         app.listen(PORT, function () {
             console.log('===========================================');
-            console.log('  Internship Tracker Server gestartet!');
+            console.log('  Intern Buddy Server gestartet!');
             console.log('  URL: http://localhost:' + PORT);
             console.log('===========================================');
 

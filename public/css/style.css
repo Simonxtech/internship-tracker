@@ -140,8 +140,9 @@ body {
 }
 
 .navbar-link.active {
-    background: var(--accent-light);
-    color: var(--accent);
+    background: none;
+    color: #1a1a1a;
+    font-weight: 700;
 }
 
 .navbar-right {
@@ -359,6 +360,7 @@ body {
     font-weight: 700;
     letter-spacing: -1px;
     line-height: 1;
+    color: #1a1a1a;
 }
 
 .stat-sub {
@@ -447,7 +449,7 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 900px;
+    min-width: 700px;
 }
 
 thead {
@@ -478,6 +480,20 @@ tr:last-child td {
 }
 
 tr:hover {
+    background: #fafaf9;
+}
+
+/* Letzte Spalte (Actions) beim horizontalen Scrollen immer sichtbar */
+.table-scroll table th:last-child,
+.table-scroll table td:last-child {
+    position: sticky;
+    right: 0;
+    background: var(--surface);
+    z-index: 1;
+    box-shadow: -3px 0 6px rgba(0,0,0,0.04);
+}
+
+.table-scroll table thead th:last-child {
     background: #fafaf9;
 }
 
@@ -955,7 +971,9 @@ tr:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    /* Dunkler, un透明er Hintergrund mit Unschärfe — kein Durchschauen */
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
     display: none;
     align-items: center;
     justify-content: center;
@@ -1015,14 +1033,16 @@ tr:hover {
     white-space: nowrap;
 }
 
+/* Link-Farbe: dezentes Dunkelgrau statt Blau */
 .url-link {
-    color: var(--accent);
+    color: var(--text-muted);
     text-decoration: none;
     font-size: 12px;
     margin-left: 4px;
 }
 
 .url-link:hover {
+    color: var(--text);
     text-decoration: underline;
 }
 
@@ -1040,6 +1060,21 @@ tr:hover {
     color: var(--danger);
     font-weight: 600;
 }
+
+/* Spaltenbreiten für die Applications-Tabelle */
+#applicationsTable td,
+#applicationsTable th {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#applicationsTable .col-company  { max-width: 140px; }
+#applicationsTable .col-position { max-width: 160px; }
+#applicationsTable .col-location { max-width: 100px; }
+#applicationsTable .col-tags     { max-width: 120px; }
+#applicationsTable .col-deadline { max-width: 100px; }
+#applicationsTable .col-salary   { max-width: 90px; }
 
 /* Quick-Links auf der Home-Seite */
 .quick-links {
@@ -1064,7 +1099,6 @@ tr:hover {
 
 .quick-link-card:hover {
     box-shadow: var(--shadow-md);
-    border-color: var(--accent);
 }
 
 .quick-link-icon {

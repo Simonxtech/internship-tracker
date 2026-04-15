@@ -24,5 +24,31 @@
       "username": "demo",
       "createdAt": "2026-04-13T22:37:36.451Z"
     }
+  },
+  "9rxkJfLOLpOUqAEmY8B0LHdiphdwizrG": {
+    "cookie": {
+      "originalMaxAge": 86400000,
+      "expires": "2026-04-15T21:46:13.540Z",
+      "httpOnly": true,
+      "path": "/"
+    },
+    "user": {
+      "id": "mnxrwk776p1v3e",
+      "username": "demo",
+      "createdAt": "2026-04-13T22:37:36.451Z"
+    }
+  },
+  "256nt4sSotsWkg4lD8oW1N5bNXMmxUO6": {
+    "cookie": {
+      "originalMaxAge": 86400000,
+      "expires": "2026-04-15T21:46:28.163Z",
+      "httpOnly": true,
+      "path": "/"
+    },
+    "user": {
+      "id": "mnxrwk776p1v3e",
+      "username": "demo",
+      "createdAt": "2026-04-13T22:37:36.451Z"
+    }
   }
 }

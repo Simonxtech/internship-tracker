@@ -91,8 +91,8 @@ function buildNavigation(user, activePage) {
     const navigationHtml = ''
         + '<div class="navbar-inner">'
         +   '<a href="/index.html" class="navbar-brand">'
-        +     '<img src="/img/logo.png" alt="Internship Tracker" style="height:32px;">'
-        +     '<span class="navbar-title">Internship Tracker</span>'
+        +     '<img src="/img/logo.png" alt="Intern Buddy" style="height:32px;">'
+        +     '<span class="navbar-title">Intern Buddy</span>'
         +   '</a>'
         +   '<div class="navbar-links" id="navLinks">'
         +     linksHtml

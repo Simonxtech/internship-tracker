@@ -195,8 +195,15 @@
     max-height: 350px;
 }
 
-/* Score-Tabelle */
+/* Score-Tabellen-Container: scrollbar wenn nötig */
+.quiz-table-wrap {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* Score-Tabelle: feste Layout-Kontrolle damit Zahlen nicht rauslaufen */
 .quiz-score-table {
+    table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
     margin-top: 16px;
@@ -211,23 +218,41 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--text-light);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.quiz-score-table td {
+/* Karriere-Name-Spalte: darf umbrechen */
+.quiz-score-table td:first-child {
     padding: 10px 14px;
     text-align: left;
     border-bottom: 1px solid var(--border);
     font-size: 14px;
     cursor: pointer;
+    white-space: normal;
+    word-break: break-word;
 }
 
-.quiz-score-table td:hover {
+.quiz-score-table td:first-child:hover {
     color: var(--accent);
+}
+
+/* Score-Spalte: feste Breite, zentriert, KEIN overflow hidden */
+.quiz-score-table td:last-child,
+.quiz-score-table th:last-child {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+    font-weight: 700;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
 }
 
 .quiz-score-table tr:last-child td {
     border-bottom: none;
 }
+
 
 /* Modal */
 .quiz-modal-bg {

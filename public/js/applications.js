@@ -217,7 +217,6 @@ function renderTable() {
 
         // Datum formatieren
         const deadlineFormatted = formatDate(app.deadline);
-        const appliedFormatted = formatDate(app.appliedDate);
 
         // Deadline-Warnung
         let deadlineClass = '';
@@ -236,19 +235,17 @@ function renderTable() {
             urlHtml = '<a href="' + escapeHtml(app.url) + '" target="_blank" class="url-link" style="font-size:11px; color:var(--accent);">Link</a>';
         }
 
-        // Tabellenzeile zusammenbauen
+        // Tabellenzeile zusammenbauen — CSS-Klassen für Spaltenbreiten
         tableHtml = tableHtml
             + '<tr>'
-            + '<td>' + escapeHtml(app.company) + ' ' + urlHtml + '</td>'
+            + '<td class="col-company" title="' + escapeHtml(app.notes) + '">' + escapeHtml(app.company) + ' ' + urlHtml + '</td>'
             + '<td>' + typeBadge + '</td>'
-            + '<td>' + escapeHtml(app.position) + '</td>'
-            + '<td>' + formatLocation(app.location, app.country) + '</td>'
+            + '<td class="col-position" title="' + escapeHtml(app.position) + '">' + escapeHtml(app.position) + '</td>'
+            + '<td class="col-location">' + formatLocation(app.location, app.country) + '</td>'
             + '<td>' + statusBadge + '</td>'
-            + '<td>' + buildTagBadges(app.periodIds) + '</td>'
-            + '<td class="' + deadlineClass + '">' + deadlineFormatted + '</td>'
-            + '<td>' + appliedFormatted + '</td>'
-            + '<td>' + formatSalary(app.salary) + '</td>'
-            + '<td class="notes-cell" title="' + escapeHtml(app.notes) + '">' + (escapeHtml(app.notes) || '–') + '</td>'
+            + '<td class="col-tags">' + buildTagBadges(app.periodIds) + '</td>'
+            + '<td class="col-deadline ' + deadlineClass + '">' + deadlineFormatted + '</td>'
+            + '<td class="col-salary">' + formatSalary(app.salary) + '</td>'
             + '<td>'
             +   '<div class="table-actions">'
             +     '<a href="/application-form.html?id=' + app.id + '" class="btn btn-ghost btn-sm" title="Edit">Edit</a>'

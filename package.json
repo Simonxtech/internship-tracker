@@ -1,7 +1,7 @@
 {
-  "name": "internship-tracker",
+  "name": "intern-buddy",
   "version": "1.0.0",
-  "description": "Web-App zum Tracken von Praktikums- und Werkstudenten-Bewerbungen — Digital Systems 1, ESB Business School Reutlingen",
+  "description": "Intern Buddy — Web-App zum Tracken von Praktikums- und Werkstudenten-Bewerbungen",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
