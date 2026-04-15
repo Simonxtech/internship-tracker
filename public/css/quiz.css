@@ -258,7 +258,8 @@
 .quiz-modal-bg {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
     display: none;
     align-items: center;
     justify-content: center;
@@ -271,7 +272,7 @@
 }
 
 .quiz-modal-box {
-    background: var(--card-bg);
+    background: var(--surface);
     border-radius: 16px;
     padding: 32px;
     max-width: 500px;
