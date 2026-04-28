@@ -1,0 +1,82 @@
+Date : 2026-04-17 00:25:00
+Directory : /Users/simonappel/Downloads/internship-tracker
+Total : 43 files,  6994 codes, 1934 comments, 1328 blanks, all 10256 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         26 |      3,630 |      1,648 |        967 |      6,245 |
+| JSON       |          8 |      1,437 |          0 |          3 |      1,440 |
+| PostCSS    |          2 |      1,177 |        102 |        221 |      1,500 |
+| HTML       |          7 |        750 |        184 |        137 |      1,071 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                             |         43 |      6,994 |      1,934 |      1,328 |     10,256 |
+| . (Files)                                                                     |          4 |      1,369 |         88 |         40 |      1,497 |
+| .claude                                                                       |          1 |         15 |          0 |          1 |         16 |
+| data                                                                          |          5 |        528 |          0 |          0 |        528 |
+| middleware                                                                    |          1 |         13 |         33 |          5 |         51 |
+| models                                                                        |          3 |        140 |        156 |         40 |        336 |
+| public                                                                        |         16 |      3,890 |      1,004 |        892 |      5,786 |
+| public (Files)                                                                |          7 |        750 |        184 |        137 |      1,071 |
+| public/css                                                                    |          2 |      1,177 |        102 |        221 |      1,500 |
+| public/js                                                                     |          7 |      1,963 |        718 |        534 |      3,215 |
+| routes                                                                        |          5 |        454 |        212 |        144 |        810 |
+| services                                                                      |          5 |        444 |        301 |        146 |        891 |
+| utils                                                                         |          3 |        141 |        140 |         60 |        341 |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                      | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/simonappel/Downloads/internship-tracker/.claude/settings.local.json    | JSON       |         15 |          0 |          1 |         16 |
+| /Users/simonappel/Downloads/internship-tracker/data/applications.json         | JSON       |        398 |          0 |          0 |        398 |
+| /Users/simonappel/Downloads/internship-tracker/data/periods.json              | JSON       |         32 |          0 |          0 |         32 |
+| /Users/simonappel/Downloads/internship-tracker/data/quizResults.json          | JSON       |         30 |          0 |          0 |         30 |
+| /Users/simonappel/Downloads/internship-tracker/data/sessions.json             | JSON       |         54 |          0 |          0 |         54 |
+| /Users/simonappel/Downloads/internship-tracker/data/users.json                | JSON       |         14 |          0 |          0 |         14 |
+| /Users/simonappel/Downloads/internship-tracker/middleware/authMiddleware.js   | JavaScript |         13 |         33 |          5 |         51 |
+| /Users/simonappel/Downloads/internship-tracker/models/Application.js          | JavaScript |         63 |         64 |         14 |        141 |
+| /Users/simonappel/Downloads/internship-tracker/models/Period.js               | JavaScript |         40 |         53 |         15 |        108 |
+| /Users/simonappel/Downloads/internship-tracker/models/User.js                 | JavaScript |         37 |         39 |         11 |         87 |
+| /Users/simonappel/Downloads/internship-tracker/package-lock.json              | JSON       |        881 |          0 |          1 |        882 |
+| /Users/simonappel/Downloads/internship-tracker/package.json                   | JSON       |         13 |          0 |          1 |         14 |
+| /Users/simonappel/Downloads/internship-tracker/public/analytics.html          | HTML       |         76 |         28 |         19 |        123 |
+| /Users/simonappel/Downloads/internship-tracker/public/application-form.html   | HTML       |        107 |         35 |         27 |        169 |
+| /Users/simonappel/Downloads/internship-tracker/public/applications.html       | HTML       |        127 |         32 |         15 |        174 |
+| /Users/simonappel/Downloads/internship-tracker/public/css/quiz.css            | PostCSS    |        311 |         22 |         48 |        381 |
+| /Users/simonappel/Downloads/internship-tracker/public/css/style.css           | PostCSS    |        866 |         80 |        173 |      1,119 |
+| /Users/simonappel/Downloads/internship-tracker/public/index.html              | HTML       |        192 |         20 |         30 |        242 |
+| /Users/simonappel/Downloads/internship-tracker/public/js/analytics.js         | JavaScript |        277 |         78 |         89 |        444 |
+| /Users/simonappel/Downloads/internship-tracker/public/js/applicationForm.js   | JavaScript |        238 |         87 |         67 |        392 |
+| /Users/simonappel/Downloads/internship-tracker/public/js/applications.js      | JavaScript |        449 |        153 |        129 |        731 |
+| /Users/simonappel/Downloads/internship-tracker/public/js/login.js             | JavaScript |        116 |         68 |         35 |        219 |
+| /Users/simonappel/Downloads/internship-tracker/public/js/map.js               | JavaScript |        143 |         82 |         58 |        283 |
+| /Users/simonappel/Downloads/internship-tracker/public/js/navigation.js        | JavaScript |        108 |         68 |         33 |        209 |
+| /Users/simonappel/Downloads/internship-tracker/public/js/quiz.js              | JavaScript |        632 |        182 |        123 |        937 |
+| /Users/simonappel/Downloads/internship-tracker/public/login.html              | HTML       |         63 |         18 |         10 |         91 |
+| /Users/simonappel/Downloads/internship-tracker/public/map.html                | HTML       |         64 |         21 |         16 |        101 |
+| /Users/simonappel/Downloads/internship-tracker/public/page7.html              | HTML       |        121 |         30 |         20 |        171 |
+| /Users/simonappel/Downloads/internship-tracker/routes/applicationRoutes.js    | JavaScript |        144 |         69 |         45 |        258 |
+| /Users/simonappel/Downloads/internship-tracker/routes/authRoutes.js           | JavaScript |         71 |         50 |         25 |        146 |
+| /Users/simonappel/Downloads/internship-tracker/routes/periodRoutes.js         | JavaScript |        173 |         51 |         45 |        269 |
+| /Users/simonappel/Downloads/internship-tracker/routes/quizRoutes.js           | JavaScript |         45 |         22 |         17 |         84 |
+| /Users/simonappel/Downloads/internship-tracker/routes/statsRoutes.js          | JavaScript |         21 |         20 |         12 |         53 |
+| /Users/simonappel/Downloads/internship-tracker/seed.js                        | JavaScript |        431 |         30 |         18 |        479 |
+| /Users/simonappel/Downloads/internship-tracker/server.js                      | JavaScript |         44 |         58 |         20 |        122 |
+| /Users/simonappel/Downloads/internship-tracker/services/applicationService.js | JavaScript |        130 |         76 |         37 |        243 |
+| /Users/simonappel/Downloads/internship-tracker/services/authService.js        | JavaScript |         68 |         61 |         31 |        160 |
+| /Users/simonappel/Downloads/internship-tracker/services/dataService.js        | JavaScript |         86 |         79 |         31 |        196 |
+| /Users/simonappel/Downloads/internship-tracker/services/quizService.js        | JavaScript |         38 |         32 |         15 |         85 |
+| /Users/simonappel/Downloads/internship-tracker/services/statsService.js       | JavaScript |        122 |         53 |         32 |        207 |
+| /Users/simonappel/Downloads/internship-tracker/utils/fileSessionStore.js      | JavaScript |         59 |         56 |         22 |        137 |
+| /Users/simonappel/Downloads/internship-tracker/utils/helpers.js               | JavaScript |         38 |         41 |         20 |         99 |
+| /Users/simonappel/Downloads/internship-tracker/utils/logger.js                | JavaScript |         44 |         43 |         18 |        105 |
+| Total                                                                         |            |      6,994 |      1,934 |      1,328 |     10,256 |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
