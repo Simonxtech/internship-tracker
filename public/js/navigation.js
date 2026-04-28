@@ -72,7 +72,7 @@ function buildNavigation(user, activePage) {
         { id: 'add',           href: '/application-form.html', label: 'Add New'      },
         { id: 'analytics',     href: '/analytics.html',        label: 'Analytics'    },
         { id: 'map',           href: '/map.html',              label: 'Map'          },
-        { id: 'page7',         href: '/page7.html',            label: 'Assessment'   }
+        { id: 'quiz',          href: '/quiz.html',             label: 'Quiz'         }
     ];
 
     // Links als HTML-Strings bauen

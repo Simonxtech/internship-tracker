@@ -255,7 +255,7 @@ resetScores();
  * dann prüfen ob ein früheres Ergebnis existiert.
  */
 async function initQuizPage() {
-    var currentUser = await initPage('page7');
+    var currentUser = await initPage('quiz');
     if (!currentUser) {
         return;
     }
